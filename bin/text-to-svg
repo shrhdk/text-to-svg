@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+var path = require('path');
+var program = require('commander');
+var TextToSVG = require('../build/src/index.js').TextToSVG;
+
+program
+  .version('0.0.1')
+  .option('-t, --text [Text to convert to SVG]', 'Specify text to convert to SVG.')
+  .option('-f, --font [File path of the font]', 'Specify the file path of the font.')
+  .option('-s, --size []', 'Specify font size, default is 16')
+  .parse(process.argv);
+
+
+var defaultURL = path.join(path.dirname(__filename), '../fonts/ipag.ttf');
+var url = program.font || defaultURL;
+var fontSize = program.fontSize || 10;
+var x = 0, y = fontSize;
+
+var textToSVG = new TextToSVG(url);
+var svg = textToSVG.getSVG(program.text, x, y, fontSize);
+
+console.log(svg);

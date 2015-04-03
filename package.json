@@ -1,0 +1,50 @@
+{
+  "name": "text-to-svg",
+  "version": "1.0.0",
+  "description": "Convert text to SVG path.",
+  "main": "index.js",
+  "files": [
+    ".gitignore",
+    "CHANGELOG.md",
+    "README.md",
+    "package.json",
+    "node_modules",
+    "gulpfile.js",
+    "bin",
+    "build",
+    "src",
+    "test",
+    "fonts"
+  ],
+  "bin": {
+    "text-to-svg": "bin/text-to-svg"
+  },
+  "scripts": {
+    "test": "gulp test",
+    "clean": "gulp clean",
+    "build": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shrhdk/text-to-svg"
+  },
+  "keywords": [
+    "SVG"
+  ],
+  "author": "Hideki Shiro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shrhdk/text-to-svg/issues"
+  },
+  "homepage": "https://github.com/shrhdk/text-to-svg",
+  "dependencies": {
+    "commander": "^2.7.1",
+    "opentype.js": "^0.4.6"
+  },
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.0.0",
+    "gulp-mocha": "^2.0.1"
+  }
+}
