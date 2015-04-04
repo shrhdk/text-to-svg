@@ -37,9 +37,13 @@ export class TextToSVG {
     this.font = opentype.parse(ab);
   }
 
-  getPath(text, x, y, fontSize, options) {
+  getD(text, x, y, fontSize, options) {
     let path = this.font.getPath(text, x, y, fontSize, options);
-    let d = path.commands.map(cmd => cmdToSVG(cmd)).join(' ');
+    return path.commands.map(cmd => cmdToSVG(cmd)).join(' ');
+  }
+
+  getPath(text, x, y, fontSize, options) {
+    let d = this.getD(text, x, y, fontSize, options);
     return `<path d="${d}"/>`;
   }
 
