@@ -11,19 +11,24 @@ gulp.task('clean', function (done) {
 
 // Build
 
-gulp.task('build:test', function () {
-  return gulp.src('test/**/*.js')
-    .pipe(babel())
-    .pipe(gulp.dest('build/test/'));
-});
-
 gulp.task('build:src', function () {
   return gulp.src('src/**/*.js')
     .pipe(babel())
     .pipe(gulp.dest('build/src/'));
 });
 
-gulp.task('build', ['build:src', 'build:test']);
+gulp.task('build:res', function () {
+  return gulp.src(['fonts/**/*'])
+    .pipe(gulp.dest('build/fonts/'));
+});
+
+gulp.task('build:test', function () {
+  return gulp.src('test/**/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('build/test/'));
+});
+
+gulp.task('build', ['build:src', 'build:res', 'build:test']);
 
 // Test
 

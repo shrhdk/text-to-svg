@@ -4,46 +4,78 @@
 
 Convert text to SVG path.
 
-## Use as Command
+```js
+var TextToSVG = require('text-to-svg').TextToSVG;
+var textToSVG = new TextToSVG();
 
+var attributes = {fill: 'red', stroke: 'black'};
+var options = {x: 0, y: 0, fontSize: 72, attributes: attributes};
+
+var svg = textToSVG.getSVG('hello', options);
+
+console.log(svg);
 ```
-$ npm install -g text-to-svg
-$ text-to-svg --text 'Hello World' --size 20 > hello.svg
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path fill="red" stroke="black" d="M 5.2734375 -54.0703125 L 10.6171875..."/>
+</svg>
 ```
 
-## Use as Lib
-
-Install
+## Installation
 
 ```
 $ npm install --save text-to-svg
 ```
 
-Example
+## API
 
-```
-var TextToSVG = require('text-to-svg').TextToSVG;
-var textToSVG = new TextToSVG('./fonts/example.ttf');
+### `new TextToSVG(file = '...path of the default font...')`
 
-var x = 0, y = 0, fontSize = 18;
+Construct TextToSVG. The default font is [IPA font](http://ipafont.ipa.go.jp/).
 
-var d = textToSVG.getD('hello', x, y, fontSize);
-console.log(d);
+ - `file`: The file path of the font. (`*ttf`, `*otf`)
 
-var path = textToSVG.getPath('hello', x, y, fontSize);
-console.log(path);
+### `TextToSVG.getD(text, options = {})`
 
-var svg = textToSVG.getSVG('hello', x, y, fontSize);
-console.log(svg);
-```
+Get the path data for `d` attribute of `path`.
 
-Output
+ - `text`: Text to convert to SVG path.
 
-```
-M 1.318359375 -13.517578125 L 2.654296875 -13.517578125 L 2.654296875 -8.4990234375...
-<path d="M 1.318359375 -13.517578125 L 2.654296875 -13.517578125 L 2.654296875 -8.4990234375...
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M 1.318359375...
-```
+Options is an optional object containing:
+
+ - `x`: Horizontal position of the beginning of the text. (default: 0)
+ - `y`: Vertical position of the baseline of the text. (default: 0)
+ - `fontSize`: Size of the text (default: 72).
+ - `kerning`: if true takes kerning information into account (default: true)
+
+### `TextToSVG.getPath(text, options = {})`
+
+Get the `path` element of SVG.
+
+ - `text`: Text to convert to SVG path.
+
+Options is an optional object containing:
+
+ - `x`: Horizontal position of the beginning of the text. (default: 0)
+ - `y`: Vertical position of the baseline of the text. (default: 0)
+ - `fontSize`: Size of the text (default: 72).
+ - `kerning`: if true takes kerning information into account (default: true)
+ - `attributes`: Key-Value pairs of attributes of `path` element.
+
+### `TextToSVG.getSVG(text, options = {})`
+
+Get the SVG.
+
+ - `text`: Text to convert to SVG path.
+
+Options is an optional object containing:
+
+ - `x`: Horizontal position of the beginning of the text. (default: 0)
+ - `y`: Vertical position of the baseline of the text. (default: 0)
+ - `fontSize`: Size of the text (default: 72).
+ - `kerning`: if true takes kerning information into account (default: true)
+ - `attributes`: Key-Value pairs of attributes of `path` element.
 
 ## License
 
