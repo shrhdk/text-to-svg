@@ -1,8 +1,12 @@
 # CHANGELOG
 
+## 2.0.2
+
+ - Fix index.js
+
 ## 2.0.1
 
- - Include /index.js to npm files.
+ - Include index.js to npm files.
 
 ## 2.0.0
 
