@@ -1,6 +1,6 @@
 {
   "name": "text-to-svg",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Convert text to SVG path.",
   "main": "index.js",
   "files": [
@@ -10,6 +10,7 @@
     "package.json",
     "node_modules",
     "gulpfile.js",
+    "index.js",
     "build",
     "src",
     "test",

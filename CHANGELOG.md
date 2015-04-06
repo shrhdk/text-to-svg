@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1
+
+ - Include /index.js to npm files.
+
 ## 2.0.0
 
  - Reform the API.
