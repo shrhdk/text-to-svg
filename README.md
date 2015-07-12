@@ -48,6 +48,7 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: 0)
  - `fontSize`: Size of the text (default: 72).
  - `kerning`: if true takes kerning information into account (default: true)
+ - `anchor`: Anchor of object in coordinate. `"top"` or `"bottom"`. (default: `"bottom"`)
 
 ### `TextToSVG.getPath(text, options = {})`
 
@@ -61,6 +62,7 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: 0)
  - `fontSize`: Size of the text (default: 72).
  - `kerning`: if true takes kerning information into account (default: true)
+ - `anchor`: Anchor of object in coordinate. `"top"` or `"bottom"`. (default: `"bottom"`)
  - `attributes`: Key-Value pairs of attributes of `path` element.
 
 ### `TextToSVG.getSVG(text, options = {})`
@@ -75,6 +77,7 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: 0)
  - `fontSize`: Size of the text (default: 72).
  - `kerning`: if true takes kerning information into account (default: true)
+ - `anchor`: Anchor of object in coordinate. `"top"` or `"bottom"`. (default: `"bottom"`)
  - `attributes`: Key-Value pairs of attributes of `path` element.
 
 ## License

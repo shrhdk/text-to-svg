@@ -50,6 +50,18 @@ export class TextToSVG {
     let fontSize = options.fontSize || 72;
     let kerning = 'kerning' in options ? options.kerning : true;
 
+    let yAnchor = options.anchor || "bottom";
+    switch (yAnchor) {
+      case "top":
+        y += this.font.ascender / this.font.unitsPerEm * fontSize;
+        break;
+      case "bottom":
+        y += 0;
+        break;
+      default:
+        throw new Error("Unknown anchor option: " + yAnchor);
+    }
+
     let path = this.font.getPath(text, x, y, fontSize, {kerning});
     return path.commands.map(cmd => cmdToSVG(cmd)).join(' ');
   }
