@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.1.0
+
+ - Add `anchor` option.
+
 ## 2.0.2
 
  - Fix index.js
