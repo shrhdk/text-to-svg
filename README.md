@@ -44,10 +44,10 @@ Get the path data for `d` attribute of `path`.
 
 Options is an optional object containing:
 
- - `x`: Horizontal position of the beginning of the text. (default: 0)
- - `y`: Vertical position of the baseline of the text. (default: 0)
- - `fontSize`: Size of the text (default: 72).
- - `kerning`: if true takes kerning information into account (default: true)
+ - `x`: Horizontal position of the beginning of the text. (default: `0`)
+ - `y`: Vertical position of the baseline of the text. (default: `0`)
+ - `fontSize`: Size of the text (default: `72`).
+ - `kerning`: if `true` takes kerning information into account (default: `true`)
  - `anchor`: Anchor of object in coordinate. `"top"` or `"bottom"`. (default: `"bottom"`)
 
 ### `TextToSVG.getPath(text, options = {})`
@@ -58,10 +58,10 @@ Get the `path` element of SVG.
 
 Options is an optional object containing:
 
- - `x`: Horizontal position of the beginning of the text. (default: 0)
- - `y`: Vertical position of the baseline of the text. (default: 0)
- - `fontSize`: Size of the text (default: 72).
- - `kerning`: if true takes kerning information into account (default: true)
+ - `x`: Horizontal position of the beginning of the text. (default: `0`)
+ - `y`: Vertical position of the baseline of the text. (default: `0`)
+ - `fontSize`: Size of the text (default: `72`).
+ - `kerning`: if `true` takes kerning information into account (default: `true`)
  - `anchor`: Anchor of object in coordinate. `"top"` or `"bottom"`. (default: `"bottom"`)
  - `attributes`: Key-Value pairs of attributes of `path` element.
 
@@ -73,10 +73,10 @@ Get the SVG.
 
 Options is an optional object containing:
 
- - `x`: Horizontal position of the beginning of the text. (default: 0)
- - `y`: Vertical position of the baseline of the text. (default: 0)
- - `fontSize`: Size of the text (default: 72).
- - `kerning`: if true takes kerning information into account (default: true)
+ - `x`: Horizontal position of the beginning of the text. (default: `0`)
+ - `y`: Vertical position of the baseline of the text. (default: `0`)
+ - `fontSize`: Size of the text (default: `72`).
+ - `kerning`: if `true` takes kerning information into account (default: `true`)
  - `anchor`: Anchor of object in coordinate. `"top"` or `"bottom"`. (default: `"bottom"`)
  - `attributes`: Key-Value pairs of attributes of `path` element.
 
