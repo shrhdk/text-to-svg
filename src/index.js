@@ -11,15 +11,6 @@ var opentype = require('opentype.js');
 
 const DEFAULT_FONT = path.join(__dirname, '../fonts/ipag.ttf');
 
-function toArrayBuffer(buffer) {
-  var ab = new ArrayBuffer(buffer.length);
-  var view = new Uint8Array(ab);
-  for (var i = 0; i < buffer.length; ++i) {
-    view[i] = buffer[i];
-  }
-  return ab;
-}
-
 function cmdToSVG(cmd) {
   switch (cmd.type) {
     case 'M':
@@ -39,9 +30,7 @@ function cmdToSVG(cmd) {
 
 export class TextToSVG {
   constructor(file = DEFAULT_FONT) {
-    let buf = fs.readFileSync(file);
-    let ab = toArrayBuffer(buf);
-    this.font = opentype.parse(ab);
+    this.font = opentype.loadSync(file);
   }
 
   getD(text, options = {}) {

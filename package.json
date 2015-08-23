@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/shrhdk/text-to-svg",
   "dependencies": {
-    "opentype.js": "^0.4.6"
+    "opentype.js": "^0.4.10"
   },
   "devDependencies": {
     "del": "^1.1.1",
