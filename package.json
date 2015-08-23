@@ -14,8 +14,12 @@
     "build",
     "src",
     "test",
-    "fonts"
+    "fonts",
+    "bin"
   ],
+  "bin": {
+    "text-to-svg": "bin/text-to-svg"
+  },
   "scripts": {
     "test": "gulp test",
     "clean": "gulp clean",
@@ -35,6 +39,7 @@
   },
   "homepage": "https://github.com/shrhdk/text-to-svg",
   "dependencies": {
+    "commander": "^2.8.1",
     "opentype.js": "^0.4.10"
   },
   "devDependencies": {
