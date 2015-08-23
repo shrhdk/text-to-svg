@@ -11,6 +11,16 @@ var opentype = require('opentype.js');
 
 const DEFAULT_FONT = path.join(__dirname, '../fonts/ipag.ttf');
 
+function parseAnchorOption(anchor) {
+  let horizontal = anchor.match(/left|center|right/gi) || [];
+  horizontal = horizontal.length == 0 ? 'left' : horizontal[0];
+
+  let vertical = anchor.match(/top|bottom|middle/gi) || [];
+  vertical = vertical.length == 0 ? 'bottom' : vertical[0];
+
+  return {horizontal, vertical};
+}
+
 export class TextToSVG {
   constructor(file = DEFAULT_FONT) {
     this.font = opentype.loadSync(file);
@@ -46,17 +56,36 @@ export class TextToSVG {
     let y = options.y || 0;
     let fontSize = options.fontSize || 72;
     let kerning = 'kerning' in options ? options.kerning : true;
+    let anchor = parseAnchorOption(options.anchor || '');
 
-    let yAnchor = options.anchor || "bottom";
-    switch (yAnchor) {
-      case "top":
-        y += this.font.ascender / this.font.unitsPerEm * fontSize;
+    let size = this.getSize(text, fontSize, {kerning});
+
+    switch (anchor.horizontal) {
+      case 'left':
+        x -= 0;
         break;
-      case "bottom":
+      case 'center':
+        x -= size.width / 2;
+        break;
+      case 'right':
+        x -= size.width;
+        break;
+      default:
+        throw new Error("Unknown anchor option: " + anchor.horizontal);
+    }
+
+    switch (anchor.vertical) {
+      case 'top':
+        y += size.height;
+        break;
+      case 'middle':
+        y += size.height / 2;
+        break;
+      case 'bottom':
         y += 0;
         break;
       default:
-        throw new Error("Unknown anchor option: " + yAnchor);
+        throw new Error("Unknown anchor option: " + anchor.vertical);
     }
 
     let path = this.font.getPath(text, x, y, fontSize, {kerning});
