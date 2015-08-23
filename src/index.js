@@ -11,23 +11,6 @@ var opentype = require('opentype.js');
 
 const DEFAULT_FONT = path.join(__dirname, '../fonts/ipag.ttf');
 
-function cmdToSVG(cmd) {
-  switch (cmd.type) {
-    case 'M':
-      return `M ${cmd.x} ${cmd.y}`;
-    case 'L':
-      return `L ${cmd.x} ${cmd.y}`;
-    case 'C':
-      return `C ${cmd.x1} ${cmd.y1} ${cmd.x2} ${cmd.y2} ${cmd.x} ${cmd.y}`;
-    case 'Q':
-      return `Q ${cmd.x1} ${cmd.y1} ${cmd.x} ${cmd.y}`;
-    case 'Z':
-      return 'Z';
-    default:
-      assert('Unknown Command: ' + cmd);
-  }
-}
-
 export class TextToSVG {
   constructor(file = DEFAULT_FONT) {
     this.font = opentype.loadSync(file);
@@ -52,7 +35,8 @@ export class TextToSVG {
     }
 
     let path = this.font.getPath(text, x, y, fontSize, {kerning});
-    return path.commands.map(cmd => cmdToSVG(cmd)).join(' ');
+
+    return path.toPathData();
   }
 
   getPath(text, options = {}) {
