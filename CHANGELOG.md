@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.2.0
+
+ - Add `getSize` method.
+ - Add `anchor` option.
+   - `left, `center` , `right`, `middle`
+ - Add command line tool.
+
 ## 2.1.0
 
  - Add `anchor` option.
