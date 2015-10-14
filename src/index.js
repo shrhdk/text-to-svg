@@ -26,7 +26,8 @@ export class TextToSVG {
     this.font = opentype.loadSync(file);
   }
 
-  getSize(text, fontSize, options = {}) {
+  getSize(text, options = {}) {
+    let fontSize = options.fontSize || 72;
     let kerning = 'kerning' in options ? options.kerning : true;
 
     let fontScale = 1 / this.font.unitsPerEm * fontSize;
@@ -58,7 +59,7 @@ export class TextToSVG {
     let kerning = 'kerning' in options ? options.kerning : true;
     let anchor = parseAnchorOption(options.anchor || '');
 
-    let size = this.getSize(text, fontSize, {kerning});
+    let size = this.getSize(text, {fontSize, kerning});
 
     switch (anchor.horizontal) {
       case 'left':
