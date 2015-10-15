@@ -6,24 +6,24 @@ var mocha = require('gulp-mocha');
 // Clean
 
 gulp.task('clean', function (done) {
-  del(['build', 'public/lib', 'npm-debug.log', '!*/.gitkeep'], done);
+  return del(['build', 'public/lib', 'npm-debug.log', '!*/.gitkeep'], done);
 });
 
 // Build
 
 gulp.task('build:src', function () {
-  gulp.src('src/**/*.js')
+  return gulp.src('src/**/*.js')
     .pipe(babel())
     .pipe(gulp.dest('build/src/'));
 });
 
 gulp.task('build:res', function () {
-  gulp.src('fonts/**/*')
+  return gulp.src('fonts/**/*')
     .pipe(gulp.dest('build/fonts/'));
 });
 
 gulp.task('build:test:src', function () {
-  gulp.src('test/**/*.js')
+  return gulp.src('test/**/*.js')
     .pipe(babel())
     .pipe(gulp.dest('build/test/'));
 });
