@@ -48,7 +48,8 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: `0`)
  - `fontSize`: Size of the text (default: `72`).
  - `kerning`: if `true` takes kerning information into account (default: `true`)
- - `anchor`: Anchor of object in coordinate. `"top"` or `"bottom"`. (default: `"bottom"`)
+ - `anchor`: Anchor of object in coordinate. (default: `'bottom left'`)
+   - (`top`, `middle`, `bottom`) + (`left`, `center`, `right`)
 
 Return value example
 
@@ -68,7 +69,8 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: `0`)
  - `fontSize`: Size of the text (default: `72`).
  - `kerning`: if `true` takes kerning information into account (default: `true`)
- - `anchor`: Anchor of object in coordinate. `'top'`, `'left'`, `'right'`, or `'bottom'`. (default: `'bottom left'`)
+ - `anchor`: Anchor of object in coordinate. (default: `'bottom left'`)
+   - (`top`, `middle`, `bottom`) + (`left`, `center`, `right`)
  - `attributes`: Key-Value pairs of attributes of `path` element.
 
 Return value example
@@ -89,7 +91,8 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: `0`)
  - `fontSize`: Size of the text (default: `72`).
  - `kerning`: if `true` takes kerning information into account (default: `true`)
- - `anchor`: Anchor of object in coordinate. `'top'`, `'left'`, `'right'`, or `'bottom'`. (default: `'bottom left'`)
+ - `anchor`: Anchor of object in coordinate. (default: `'bottom left'`)
+   - (`top`, `middle`, `bottom`) + (`left`, `center`, `right`)
  - `attributes`: Key-Value pairs of attributes of `path` element.
 
 Return value example
