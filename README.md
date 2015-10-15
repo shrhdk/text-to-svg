@@ -1,6 +1,6 @@
 # text-to-svg
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][dependency-image]][dependency-url]
 
 Convert text to SVG path.
 
@@ -126,3 +126,5 @@ MIT
 [npm-image]: https://badge.fury.io/js/text-to-svg.svg
 [travis-url]: https://travis-ci.org/shrhdk/text-to-svg
 [travis-image]: https://travis-ci.org/shrhdk/text-to-svg.svg?branch=master
+[dependency-url]: https://gemnasium.com/shrhdk/text-to-svg
+[dependency-image]: https://gemnasium.com/shrhdk/text-to-svg.svg
