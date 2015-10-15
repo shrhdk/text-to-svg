@@ -39,13 +39,13 @@
   },
   "homepage": "https://github.com/shrhdk/text-to-svg",
   "dependencies": {
-    "commander": "^2.8.1",
-    "opentype.js": "^0.4.10"
+    "commander": "^2.9.0",
+    "opentype.js": "^0.5.0"
   },
   "devDependencies": {
-    "del": "^1.1.1",
-    "gulp": "^3.8.11",
-    "gulp-babel": "^5.0.0",
-    "gulp-mocha": "^2.0.1"
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-mocha": "^2.1.3"
   }
 }
