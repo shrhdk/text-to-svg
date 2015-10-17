@@ -12,6 +12,11 @@ var program = require('commander')
   .option('-a, --anchor [value]', 'anchor point')
   .parse(process.argv);
 
+if(program.args.length < 1) {
+  program.outputHelp();
+  process.exit();
+}
+
 var text = program.args[0];
 var options = {
   x: program.x || 0,
