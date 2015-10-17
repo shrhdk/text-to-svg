@@ -1,6 +1,6 @@
 # text-to-svg
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][dependency-image]][dependency-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][dependency-image]][dependency-url] [![Gitter][gitter-image]][gitter-url]
 
 Convert text to SVG path.
 
@@ -128,3 +128,5 @@ MIT
 [travis-image]: https://travis-ci.org/shrhdk/text-to-svg.svg?branch=master
 [dependency-url]: https://gemnasium.com/shrhdk/text-to-svg
 [dependency-image]: https://gemnasium.com/shrhdk/text-to-svg.svg
+[gitter-url]: https://gitter.im/shrhdk/text-to-svg
+[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
