@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.2.1
+
+ - Tested on Node.js v4.2.1
+ - Update dependencies.
+ - Command line tool shows help when args are not provided.
+ - Fix API document.
+
 ## 2.2.0
 
  - Add `getSize` method.
