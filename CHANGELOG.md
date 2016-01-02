@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.2.2
+
+ - Tested on Node.js v5.3.0
+ - Update dependencies.
+   - `opentype.js`: `0.5.0` -> `0.6.0`
+
 ## 2.2.1
 
  - Tested on Node.js v4.2.1
