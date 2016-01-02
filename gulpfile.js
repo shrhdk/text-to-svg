@@ -1,3 +1,4 @@
+var assert = require('assert');
 var gulp = require('gulp');
 var del = require('del');
 var babel = require('gulp-babel');
@@ -32,7 +33,16 @@ gulp.task('build', ['build:src', 'build:res', 'build:test:src']);
 
 // Test
 
-gulp.task('test', ['build'], function (done) {
+gulp.task('version-check', function() {
+  var packageVer = require('./package.json')['version'];
+  var tagVer = process.env['TRAVIS_TAG'];
+
+  if(tagVer !== '') {
+    assert.equal(packageVer, tagVer, 'Package version and tagged version are mismatched.');
+  }
+});
+
+gulp.task('test', ['build', 'version-check'], function (done) {
   gulp.src('build/test/**/*.js')
     .pipe(mocha())
     .on('end', done);
