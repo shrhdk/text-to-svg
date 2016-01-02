@@ -40,7 +40,7 @@
   "homepage": "https://github.com/shrhdk/text-to-svg",
   "dependencies": {
     "commander": "^2.9.0",
-    "opentype.js": "^0.5.0"
+    "opentype.js": "^0.6.0"
   },
   "devDependencies": {
     "del": "^2.0.2",
