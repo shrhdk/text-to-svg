@@ -13,7 +13,7 @@ gulp.task('clean', function (done) {
 
 gulp.task('build:src', function () {
   return gulp.src('src/**/*.js')
-    .pipe(babel())
+    .pipe(babel({presets: ['es2015']}))
     .pipe(gulp.dest('build/src/'));
 });
 
