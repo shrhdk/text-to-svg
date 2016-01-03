@@ -17,7 +17,7 @@
 
  - Add `getSize` method.
  - Add `anchor` option.
-   - `left, `center` , `right`, `middle`
+   - `left`, `center` , `right`, `top`, `middle`, `bottom`
  - Add command line tool.
 
 ## 2.1.0
