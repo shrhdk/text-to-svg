@@ -37,8 +37,8 @@ gulp.task('version-check', function() {
   var packageVer = require('./package.json')['version'];
   var tagVer = process.env['TRAVIS_TAG'];
 
-  if(tagVer !== '') {
-    assert.equal(packageVer, tagVer, 'Package version and tagged version are mismatched.');
+  if(tagVer) {
+    assert.equal(packageVer, tagVer, `Package version and tagged version are mismatched. Package version is ${packageVer}, but tagged version is ${tagVer}`);
   }
 });
 
