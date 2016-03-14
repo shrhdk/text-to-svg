@@ -4,10 +4,10 @@
 
 'use strict';
 
-var path = require('path');
-var fs = require('fs');
-var assert = require('assert');
-var opentype = require('opentype.js');
+import path from 'path';
+import fs from 'fs';
+import assert from 'assert';
+import opentype from 'opentype.js';
 
 const DEFAULT_FONT = path.join(__dirname, '../fonts/ipag.ttf');
 
