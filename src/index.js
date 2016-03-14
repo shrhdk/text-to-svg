@@ -72,7 +72,7 @@ export class TextToSVG {
         x -= size.width;
         break;
       default:
-        throw new Error("Unknown anchor option: " + anchor.horizontal);
+        throw new Error(`Unknown anchor option: ${anchor.horizontal}`);
     }
 
     switch (anchor.vertical) {
@@ -86,7 +86,7 @@ export class TextToSVG {
         y += 0;
         break;
       default:
-        throw new Error("Unknown anchor option: " + anchor.vertical);
+        throw new Error(`Unknown anchor option: ${anchor.vertical}`);
     }
 
     let path = this.font.getPath(text, x, y, fontSize, {kerning});
