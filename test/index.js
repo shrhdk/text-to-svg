@@ -7,7 +7,7 @@
 import assert from 'assert';
 import TextToSVG from '../src/index.js';
 
-var textToSVG = new TextToSVG();
+const textToSVG = new TextToSVG();
 
 function assertAlmostEqual(a, b, epsilon) {
   assert.strictEqual(Math.abs(a - b) < epsilon, true);
@@ -21,8 +21,8 @@ class TextToSVGTest {
 
   getSize(options, expected) {
     const epsilon = 0.001;
-    let title = JSON.stringify(options);
-    let actual = this.textToSVG.getSize(this.text, options);
+    const title = JSON.stringify(options);
+    const actual = this.textToSVG.getSize(this.text, options);
 
     it(title, () => {
       assertAlmostEqual(actual.width, expected.width, epsilon);
@@ -31,8 +31,8 @@ class TextToSVGTest {
   }
 
   getD(options, expected) {
-    let title = JSON.stringify(options);
-    let actual = this.textToSVG.getD(this.text, options);
+    const title = JSON.stringify(options);
+    const actual = this.textToSVG.getD(this.text, options);
 
     it(title, () => {
       assert.strictEqual(actual, expected);
@@ -43,7 +43,7 @@ class TextToSVGTest {
 describe('TextToSVG', () => {
   describe('getSize', () => {
     describe('"hello", ', () => {
-      let hello = new TextToSVGTest('hello');
+      const hello = new TextToSVGTest('hello');
 
       hello.getSize({}, {width: 180, height: 54.703125});
 
@@ -55,7 +55,7 @@ describe('TextToSVG', () => {
     });
 
     describe('宇治', () => {
-      let uji = new TextToSVGTest('宇治');
+      const uji = new TextToSVGTest('宇治');
 
       uji.getSize({}, {width: 144, height: 54.703125});
 
@@ -69,7 +69,7 @@ describe('TextToSVG', () => {
 
   describe('getD', () => {
     describe('hello, ', () => {
-      let hello = new TextToSVGTest('hello');
+      const hello = new TextToSVGTest('hello');
 
       hello.getD({}, 'M5.27-54.07L10.62-54.07L10.62-34.00Q15.86-39.23 21.02-39.23Q26.89-39.23 29.60-34.07Q31.11-31.15 31.11-27L31.11-3.66L25.77-3.66L25.77-25.42Q25.77-34.14 20.18-34.14Q16.42-34.14 13.57-31.39Q10.62-28.44 10.62-24.64L10.62-3.66L5.27-3.66L5.27-54.07ZM67.68-14.27Q64.55-2.25 54.07-2.25Q47.57-2.25 43.77-7.66Q40.32-12.62 40.32-20.74Q40.32-28.51 43.56-33.47Q47.36-39.23 54-39.23Q66.97-39.23 67.82-19.65L45.74-19.65Q46.16-7.07 54.14-7.07Q60.47-7.07 62.05-14.27L67.68-14.27M62.05-24.26Q60.89-34.42 54-34.42Q47.36-34.42 45.95-24.26L62.05-24.26ZM92.81-11.53Q92.81-8.44 95.77-8.44Q98.19-8.44 101.07-9L101.07-3.62Q96.82-3.02 94.82-3.02Q87.19-3.02 87.19-10.51L87.19-54.07L92.81-54.07L92.81-11.53ZM128.81-11.53Q128.81-8.44 131.77-8.44Q134.19-8.44 137.07-9L137.07-3.62Q132.82-3.02 130.82-3.02Q123.19-3.02 123.19-10.51L123.19-54.07L128.81-54.07L128.81-11.53ZM162.07-39.23Q168.68-39.23 172.44-33.40Q175.68-28.55 175.68-20.74Q175.68-14.87 173.74-10.44Q170.16-2.21 161.93-2.21Q155.57-2.21 151.77-7.63Q148.32-12.59 148.32-20.74Q148.32-29.53 152.30-34.56Q156.09-39.23 162.07-39.23M161.93-34.21Q158.06-34.21 155.88-30.16Q153.95-26.61 153.95-20.74Q153.95-15.33 155.53-11.92Q157.71-7.24 162-7.24Q165.94-7.24 168.12-11.29Q170.05-14.84 170.05-20.67Q170.05-26.75 168.05-30.23Q165.90-34.21 161.93-34.21Z');
 
@@ -105,7 +105,7 @@ describe('TextToSVG', () => {
     });
 
     describe('宇治', () => {
-      let uji = new TextToSVGTest('宇治');
+      const uji = new TextToSVGTest('宇治');
 
       uji.getD({}, 'M38.46-49.82L65.00-49.82L65.00-35.37L59.59-35.37L59.59-45.28L12.27-45.28L12.27-35.37L6.93-35.37L6.93-49.82L32.98-49.82L32.98-59.77L38.46-59.77L38.46-49.82M39.13-32.63L39.13-21.83L67.68-21.83L67.68-17.16L39.13-17.16L39.13 0Q39.13 3.06 37.62 4.22Q36.35 5.17 32.98 5.17Q28.44 5.17 22.82 4.54L22.04-0.81Q28.41 0.07 31.68 0.07Q33.79 0.07 33.79-1.72L33.79-17.16L4.39-17.16L4.39-21.83L33.79-21.83L33.79-32.63L15.47-32.63L15.47-37.30L56.46-37.30L56.46-32.63L39.13-32.63ZM101.57-34.07L102.23-35.12Q108.14-45.88 112.18-58.39L117.77-56.74Q112.96-44.19 107.47-34.77L107.19-34.28L107.93-34.28Q114.79-34.56 122.45-35.30L128.88-35.79Q125.30-40.75 120.87-45.28L125.12-47.81Q133.59-38.64 139.25-30.45L134.86-26.93Q132.47-30.59 131.77-31.68L129.80-31.46Q117.18-29.85 95.91-28.65L93.87-33.86Q99.67-33.96 101.57-34.07M133.49-23.70L133.49 5.03L128.39 5.03L128.39 1.16L105.01 1.16L105.01 5.03L99.91 5.03L99.91-23.70L133.49-23.70M105.01-19.30L105.01-3.30L128.39-3.30L128.39-19.30L105.01-19.30M91.79-42.19Q86.80-48.27 80.86-52.70L84.52-56.74Q90.14-52.70 95.70-46.51L91.79-42.19M88.10-25.56Q82.93-31.39 76.89-35.86L80.54-39.90Q87.01-35.30 92.00-29.88L88.10-25.56M77.17-0.14Q85.04-9.42 91.23-21.73L95.03-18.14Q88.63-4.89 81.42 4.46L77.17-0.14Z');
 

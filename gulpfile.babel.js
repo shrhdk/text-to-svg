@@ -8,7 +8,7 @@ import mocha from 'gulp-mocha';
 
 // Clean
 
-gulp.task('clean', (done) => {
+gulp.task('clean', done => {
   return del(['build', 'public/lib', 'npm-debug.log', '!*/.gitkeep'], done);
 });
 
@@ -36,15 +36,15 @@ gulp.task('build', ['build:src', 'build:res', 'build:test:src']);
 // Test
 
 gulp.task('version-check', () => {
-  var packageVer = require('./package.json')['version'];
-  var tagVer = process.env['TRAVIS_TAG'];
+  const packageVer = require('./package.json')['version'];
+  const tagVer = process.env['TRAVIS_TAG'];
 
   if (tagVer) {
     assert.equal(packageVer, tagVer, `Package version and tagged version are mismatched. Package version is ${packageVer}, but tagged version is ${tagVer}`);
   }
 });
 
-gulp.task('test', ['build', 'version-check'], (done) => {
+gulp.task('test', ['build', 'version-check'], done => {
   gulp.src('build/test/**/*.js')
     .pipe(mocha())
     .on('end', done);

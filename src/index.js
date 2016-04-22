@@ -27,27 +27,27 @@ export default class TextToSVG {
   }
 
   getSize(text, options = {}) {
-    let fontSize = options.fontSize || 72;
-    let kerning = 'kerning' in options ? options.kerning : true;
+    const fontSize = options.fontSize || 72;
+    const kerning = 'kerning' in options ? options.kerning : true;
 
-    let fontScale = 1 / this.font.unitsPerEm * fontSize;
+    const fontScale = 1 / this.font.unitsPerEm * fontSize;
 
     let width = 0;
-    let glyphs = this.font.stringToGlyphs(text);
+    const glyphs = this.font.stringToGlyphs(text);
     for (let i = 0; i < glyphs.length; i++) {
-      let glyph = glyphs[i];
+      const glyph = glyphs[i];
 
       if (glyph.advanceWidth) {
         width += glyph.advanceWidth * fontScale;
       }
 
       if (kerning && i < glyphs.length - 1) {
-        let kerningValue = this.font.getKerningValue(glyph, glyphs[i + 1]);
+        const kerningValue = this.font.getKerningValue(glyph, glyphs[i + 1]);
         width += kerningValue * fontScale;
       }
     }
 
-    let height = this.font.tables.head.yMax * fontScale;
+    const height = this.font.tables.head.yMax * fontScale;
 
     return {width, height};
   }
@@ -55,11 +55,11 @@ export default class TextToSVG {
   getD(text, options = {}) {
     let x = options.x || 0;
     let y = options.y || 0;
-    let fontSize = options.fontSize || 72;
-    let kerning = 'kerning' in options ? options.kerning : true;
-    let anchor = parseAnchorOption(options.anchor || '');
+    const fontSize = options.fontSize || 72;
+    const kerning = 'kerning' in options ? options.kerning : true;
+    const anchor = parseAnchorOption(options.anchor || '');
 
-    let size = this.getSize(text, {fontSize, kerning});
+    const size = this.getSize(text, {fontSize, kerning});
 
     switch (anchor.horizontal) {
       case 'left':
@@ -89,7 +89,7 @@ export default class TextToSVG {
         throw new Error(`Unknown anchor option: ${anchor.vertical}`);
     }
 
-    let path = this.font.getPath(text, x, y, fontSize, {kerning});
+    const path = this.font.getPath(text, x, y, fontSize, {kerning});
 
     return path.toPathData();
   }
@@ -97,8 +97,8 @@ export default class TextToSVG {
   getPath(text, options = {}) {
     options.attributes = options.attributes || {};
 
-    let attributes = Object.keys(options.attributes).map((key) => `${key}="${options.attributes[key]}"`).join(' ');
-    let d = this.getD(text, options);
+    const attributes = Object.keys(options.attributes).map((key) => `${key}="${options.attributes[key]}"`).join(' ');
+    const d = this.getD(text, options);
 
     if (attributes) {
       return `<path ${attributes} d="${d}"/>`;
