@@ -47,7 +47,7 @@ export default class TextToSVG {
       }
     }
 
-    let height = (this.font.ascender + this.font.descender) * fontScale;
+    let height = this.font.tables.head.yMax * fontScale;
 
     return {width, height};
   }
