@@ -26,7 +26,7 @@ var options = {
   anchor: program.anchor || ''
 };
 
-var TextToSVG = require('../build/src').TextToSVG;
+var TextToSVG = require('../build/src').default;
 var textToSVG = new TextToSVG();
 var svg = textToSVG.getSVG(text, options);
 console.log(svg);
