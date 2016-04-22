@@ -21,7 +21,7 @@ function parseAnchorOption(anchor) {
   return {horizontal, vertical};
 }
 
-export class TextToSVG {
+export default class TextToSVG {
   constructor(file = DEFAULT_FONT) {
     this.font = opentype.loadSync(file);
   }

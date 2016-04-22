@@ -5,7 +5,8 @@
 Convert text to SVG path.
 
 ```js
-var TextToSVG = require('text-to-svg').TextToSVG;
+import TextToSVG from 'text-to-svg';
+
 var textToSVG = new TextToSVG();
 
 var attributes = {fill: 'red', stroke: 'black'};

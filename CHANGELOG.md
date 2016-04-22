@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 3.0.0
+
+ - Simplify module layout
+   - Please use `import TextToSVG from 'text-to-svg';`<br>instead of `var TextToSVG = require('text-to-svg').TextToSVG;`
+
 ## 2.2.2
 
  - Tested on Node.js v5.3.0

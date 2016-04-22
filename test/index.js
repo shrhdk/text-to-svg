@@ -4,9 +4,10 @@
 
 'use strict';
 
-var TextToSVG = require('../src/index.js').TextToSVG;
+import assert from 'assert';
+import TextToSVG from '../src/index.js';
+
 var textToSVG = new TextToSVG();
-var assert = require('assert');
 
 function assertAlmostEqual(a, b, epsilon) {
   assert.strictEqual(Math.abs(a - b) < epsilon, true);
