@@ -116,10 +116,10 @@ export default class TextToSVG {
 
   static _parseAnchorOption(anchor) {
     let horizontal = anchor.match(/left|center|right/gi) || [];
-    horizontal = horizontal.length == 0 ? 'left' : horizontal[0];
+    horizontal = horizontal.length === 0 ? 'left' : horizontal[0];
 
     let vertical = anchor.match(/baseline|top|bottom|middle/gi) || [];
-    vertical = vertical.length == 0 ? 'baseline' : vertical[0];
+    vertical = vertical.length === 0 ? 'baseline' : vertical[0];
 
     return {horizontal, vertical};
   }
