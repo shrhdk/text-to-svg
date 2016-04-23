@@ -26,11 +26,7 @@ export default class TextToSVG {
     this.font = opentype.loadSync(file);
   }
 
-  getSize(text, options = {}) {
-    const fontSize = options.fontSize || 72;
-    const kerning = 'kerning' in options ? options.kerning : true;
-    const fontScale = 1 / this.font.unitsPerEm * fontSize;
-
+  _getWidth(text, fontScale, kerning) {
     let width = 0;
     const glyphs = this.font.stringToGlyphs(text);
     for (let i = 0; i < glyphs.length; i++) {
@@ -45,9 +41,16 @@ export default class TextToSVG {
         width += kerningValue * fontScale;
       }
     }
+    return width;
+  }
+
+  getSize(text, options = {}) {
+    const fontSize = options.fontSize || 72;
+    const kerning = 'kerning' in options ? options.kerning : true;
+    const fontScale = 1 / this.font.unitsPerEm * fontSize;
 
     return {
-      width,
+      width: this._getWidth(text, fontScale, kerning),
       height: (this.font.ascender - this.font.descender) * fontScale,
       ascender: this.font.ascender * fontScale,
       descender: this.font.descender * fontScale
