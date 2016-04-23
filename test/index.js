@@ -7,15 +7,13 @@
 import assert from 'assert';
 import TextToSVG from '../src/index.js';
 
-const textToSVG = new TextToSVG();
-
 function assertAlmostEqual(a, b, epsilon) {
   assert.strictEqual(Math.abs(a - b) < epsilon, true);
 }
 
 class TextToSVGTest {
   constructor(text) {
-    this.textToSVG = new TextToSVG();
+    this.textToSVG = TextToSVG.loadSync();
     this.text = text;
   }
 

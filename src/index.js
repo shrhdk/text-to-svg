@@ -12,8 +12,22 @@ import opentype from 'opentype.js';
 const DEFAULT_FONT = path.join(__dirname, '../fonts/ipag.ttf');
 
 export default class TextToSVG {
-  constructor(file = DEFAULT_FONT) {
-    this.font = opentype.loadSync(file);
+  constructor(font) {
+    this.font = font;
+  }
+
+  static loadSync(file = DEFAULT_FONT) {
+    return new TextToSVG(opentype.loadSync(file));
+  }
+
+  static load(url, cb) {
+    opentype.load(url, (err, font) => {
+      if (err != null) {
+        return cb(err, null)
+      }
+
+      return cb(null, new TextToSVG(font));
+    });
   }
 
   getSize(text, options = {}) {
@@ -36,7 +50,7 @@ export default class TextToSVG {
     const kerning = 'kerning' in options ? options.kerning : true;
     const anchor = TextToSVG._parseAnchorOption(options.anchor || '');
 
-    const size = this.getSize(text, {fontSize, kerning});
+    const size = this.getSize(text, { fontSize, kerning });
 
     switch (anchor.horizontal) {
       case 'left':
@@ -69,7 +83,7 @@ export default class TextToSVG {
         throw new Error(`Unknown anchor option: ${anchor.vertical}`);
     }
 
-    const path = this.font.getPath(text, x, y, fontSize, {kerning});
+    const path = this.font.getPath(text, x, y, fontSize, { kerning });
 
     return path.toPathData();
   }
@@ -121,6 +135,6 @@ export default class TextToSVG {
     let vertical = anchor.match(/baseline|top|bottom|middle/gi) || [];
     vertical = vertical.length === 0 ? 'baseline' : vertical[0];
 
-    return {horizontal, vertical};
+    return { horizontal, vertical };
   }
 }

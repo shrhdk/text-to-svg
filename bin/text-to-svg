@@ -31,6 +31,6 @@ var options = {
 };
 
 var TextToSVG = require('../build/src').default;
-var textToSVG = new TextToSVG();
+var textToSVG = TextToSVG.loadSync();
 var svg = textToSVG.getSVG(text, options);
 console.log(svg);

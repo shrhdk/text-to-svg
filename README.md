@@ -2,17 +2,16 @@
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][dependency-image]][dependency-url] [![Gitter][gitter-image]][gitter-url]
 
-Convert text to SVG path.
+Convert text to SVG path without native dependencies.
 
 ```js
-import TextToSVG from 'text-to-svg';
+const TextToSVG = require('text-to-svg').default;
+const textToSVG = TextToSVG.loadSync();
 
-var textToSVG = new TextToSVG();
+const attributes = {fill: 'red', stroke: 'black'};
+const options = {x: 0, y: 0, fontSize: 72, attributes: attributes};
 
-var attributes = {fill: 'red', stroke: 'black'};
-var options = {x: 0, y: 0, fontSize: 72, attributes: attributes};
-
-var svg = textToSVG.getSVG('hello', options);
+const svg = textToSVG.getSVG('hello', options);
 
 console.log(svg);
 ```
@@ -29,13 +28,36 @@ console.log(svg);
 $ npm install --save text-to-svg
 ```
 
+## Constructor
+
+An example for loading default font synchronously. The default font is [IPA font](http://ipafont.ipa.go.jp/). ** This method only works on Node.js. **
+
+```js
+const textToSVG = TextToSVG.loadSync();
+const svg = textToSVG.getSVG('hello');
+console.log(svg);
+```
+
+An example for loading font synchronously. ** This method only works on Node.js. **
+
+```js
+// Argument is file path (NOT URL)
+const textToSVG = TextToSVG.loadSync('/fonts/Noto-Sans.otf');
+const svg = textToSVG.getSVG('hello');
+console.log(svg);
+```
+
+An example for loading font asynchronously.
+
+```js
+// First argument is URL on web browsers, but it is file path on Node.js.
+TextToSVG.load('/fonts/Noto-Sans.otf', function(err, textToSVG) {
+    const svg = textToSVG.getSVG('hello');
+    console.log(svg);
+});
+```
+
 ## API
-
-### `new TextToSVG(file = '...path of the default font...')`
-
-Construct TextToSVG. The default font is [IPA font](http://ipafont.ipa.go.jp/).
-
- - `file`: The file path of the font. (`*ttf`, `*otf`)
 
 ### `TextToSVG.getD(text, options = {})`
 
