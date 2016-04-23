@@ -3,7 +3,12 @@
 ## 3.0.0
 
  - Simplify module layout
-   - Please use `import TextToSVG from 'text-to-svg';`<br>instead of `var TextToSVG = require('text-to-svg').TextToSVG;`
+   - Please use `import TextToSVG from 'text-to-svg';`<br>or `const TextToSVG = require('text-to-svg').default;`<br>instead of `var TextToSVG = require('text-to-svg').TextToSVG;`
+ - Correct vertical anchor option.
+   - Correct `top` and `bottom`.
+   - Add `baseline`.
+ - Add `width` and `height` attribute to SVG element.
+ - Add `ascender` and `descender` to result of `getSize` method.
 
 ## 2.2.2
 
