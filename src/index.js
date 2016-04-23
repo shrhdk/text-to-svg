@@ -138,3 +138,5 @@ export default class TextToSVG {
     return { horizontal, vertical };
   }
 }
+
+module.exports = exports['default'];

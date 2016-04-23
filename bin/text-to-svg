@@ -30,7 +30,7 @@ var options = {
   anchor: program.anchor || ''
 };
 
-var TextToSVG = require('../build/src').default;
+var TextToSVG = require('../build/src');
 var textToSVG = TextToSVG.loadSync();
 var svg = textToSVG.getSVG(text, options);
 console.log(svg);

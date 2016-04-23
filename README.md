@@ -5,7 +5,7 @@
 Convert text to SVG path without native dependencies.
 
 ```js
-const TextToSVG = require('text-to-svg').default;
+const TextToSVG = require('text-to-svg');
 const textToSVG = TextToSVG.loadSync();
 
 const attributes = {fill: 'red', stroke: 'black'};
