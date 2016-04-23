@@ -11,19 +11,19 @@ import opentype from 'opentype.js';
 
 const DEFAULT_FONT = path.join(__dirname, '../fonts/ipag.ttf');
 
-function parseAnchorOption(anchor) {
-  let horizontal = anchor.match(/left|center|right/gi) || [];
-  horizontal = horizontal.length == 0 ? 'left' : horizontal[0];
-
-  let vertical = anchor.match(/top|bottom|middle/gi) || [];
-  vertical = vertical.length == 0 ? 'bottom' : vertical[0];
-
-  return {horizontal, vertical};
-}
-
 export default class TextToSVG {
   constructor(file = DEFAULT_FONT) {
     this.font = opentype.loadSync(file);
+  }
+
+  static _parseAnchorOption(anchor) {
+    let horizontal = anchor.match(/left|center|right/gi) || [];
+    horizontal = horizontal.length == 0 ? 'left' : horizontal[0];
+
+    let vertical = anchor.match(/top|bottom|middle/gi) || [];
+    vertical = vertical.length == 0 ? 'bottom' : vertical[0];
+
+    return {horizontal, vertical};
   }
 
   _getWidth(text, fontScale, kerning) {
@@ -62,7 +62,7 @@ export default class TextToSVG {
     let y = options.y || 0;
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
-    const anchor = parseAnchorOption(options.anchor || '');
+    const anchor = TextToSVG._parseAnchorOption(options.anchor || '');
 
     const size = this.getSize(text, {fontSize, kerning});
 
