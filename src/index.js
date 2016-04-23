@@ -16,34 +16,6 @@ export default class TextToSVG {
     this.font = opentype.loadSync(file);
   }
 
-  static _parseAnchorOption(anchor) {
-    let horizontal = anchor.match(/left|center|right/gi) || [];
-    horizontal = horizontal.length == 0 ? 'left' : horizontal[0];
-
-    let vertical = anchor.match(/top|bottom|middle/gi) || [];
-    vertical = vertical.length == 0 ? 'bottom' : vertical[0];
-
-    return {horizontal, vertical};
-  }
-
-  _getWidth(text, fontScale, kerning) {
-    let width = 0;
-    const glyphs = this.font.stringToGlyphs(text);
-    for (let i = 0; i < glyphs.length; i++) {
-      const glyph = glyphs[i];
-
-      if (glyph.advanceWidth) {
-        width += glyph.advanceWidth * fontScale;
-      }
-
-      if (kerning && i < glyphs.length - 1) {
-        const kerningValue = this.font.getKerningValue(glyph, glyphs[i + 1]);
-        width += kerningValue * fontScale;
-      }
-    }
-    return width;
-  }
-
   getSize(text, options = {}) {
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
@@ -119,5 +91,33 @@ export default class TextToSVG {
     svg += '</svg>';
 
     return svg;
+  }
+
+  _getWidth(text, fontScale, kerning) {
+    let width = 0;
+    const glyphs = this.font.stringToGlyphs(text);
+    for (let i = 0; i < glyphs.length; i++) {
+      const glyph = glyphs[i];
+
+      if (glyph.advanceWidth) {
+        width += glyph.advanceWidth * fontScale;
+      }
+
+      if (kerning && i < glyphs.length - 1) {
+        const kerningValue = this.font.getKerningValue(glyph, glyphs[i + 1]);
+        width += kerningValue * fontScale;
+      }
+    }
+    return width;
+  }
+
+  static _parseAnchorOption(anchor) {
+    let horizontal = anchor.match(/left|center|right/gi) || [];
+    horizontal = horizontal.length == 0 ? 'left' : horizontal[0];
+
+    let vertical = anchor.match(/top|bottom|middle/gi) || [];
+    vertical = vertical.length == 0 ? 'bottom' : vertical[0];
+
+    return {horizontal, vertical};
   }
 }
