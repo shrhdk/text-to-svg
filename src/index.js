@@ -29,7 +29,6 @@ export default class TextToSVG {
   getSize(text, options = {}) {
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
-
     const fontScale = 1 / this.font.unitsPerEm * fontSize;
 
     let width = 0;
@@ -47,9 +46,12 @@ export default class TextToSVG {
       }
     }
 
-    const height = this.font.tables.head.yMax * fontScale;
-
-    return {width, height};
+    return {
+      width,
+      height: (this.font.ascender - this.font.descender) * fontScale,
+      ascender: this.font.ascender * fontScale,
+      descender: this.font.descender * fontScale
+    };
   }
 
   getD(text, options = {}) {
@@ -77,13 +79,13 @@ export default class TextToSVG {
 
     switch (anchor.vertical) {
       case 'top':
-        y += size.height;
+        y += size.ascender;
         break;
       case 'middle':
         y += size.height / 2;
         break;
       case 'bottom':
-        y += 0;
+        y += size.descender;
         break;
       default:
         throw new Error(`Unknown anchor option: ${anchor.vertical}`);
