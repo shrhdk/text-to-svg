@@ -53,6 +53,9 @@ export default class TextToSVG {
     }
 
     switch (anchor.vertical) {
+      case 'baseline':
+        y += 0;
+        break;
       case 'top':
         y += size.ascender;
         break;
@@ -115,8 +118,8 @@ export default class TextToSVG {
     let horizontal = anchor.match(/left|center|right/gi) || [];
     horizontal = horizontal.length == 0 ? 'left' : horizontal[0];
 
-    let vertical = anchor.match(/top|bottom|middle/gi) || [];
-    vertical = vertical.length == 0 ? 'bottom' : vertical[0];
+    let vertical = anchor.match(/baseline|top|bottom|middle/gi) || [];
+    vertical = vertical.length == 0 ? 'baseline' : vertical[0];
 
     return {horizontal, vertical};
   }
