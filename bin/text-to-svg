@@ -4,9 +4,9 @@
  * Copyright (c) 2016 Hideki Shiro
  */
 
-var package = require('../package');
+const package = require('../package');
 
-var program = require('commander')
+const program = require('commander')
   .version(package.version)
   .usage('[options] text')
   .option('-x <n>', 'horizontal offset', parseFloat)
@@ -21,8 +21,8 @@ if(program.args.length < 1) {
   process.exit();
 }
 
-var text = program.args[0];
-var options = {
+const text = program.args[0];
+const options = {
   x: program.x || 0,
   y: program.y || 0,
   fontSize: program.size || 72,
@@ -30,7 +30,7 @@ var options = {
   anchor: program.anchor || ''
 };
 
-var TextToSVG = require('../build/src');
-var textToSVG = TextToSVG.loadSync();
-var svg = textToSVG.getSVG(text, options);
+const TextToSVG = require('../build/src');
+const textToSVG = TextToSVG.loadSync();
+const svg = textToSVG.getSVG(text, options);
 console.log(svg);
