@@ -9,7 +9,7 @@ import mocha from 'gulp-mocha';
 // Clean
 
 gulp.task('clean', done => {
-  return del(['build', 'public/lib', 'npm-debug.log', '!*/.gitkeep'], done);
+  return del(['build', 'npm-debug.log', '!*/.gitkeep'], done);
 });
 
 // Build
