@@ -113,7 +113,8 @@ export default class TextToSVG {
   }
 
   getSVG(text, options = {}) {
-    let svg = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">';
+    const size = this.getSize(text, options)
+    let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${size.width}" height="${size.height}">`;
     svg += this.getPath(text, options);
     svg += '</svg>';
 
