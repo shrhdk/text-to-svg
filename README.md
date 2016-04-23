@@ -115,8 +115,13 @@ Options is an optional object containing:
 
 Return value example
 
-```js
-{width: 100, height: 20}
+```json
+{
+  width: 100,
+  height: 20,
+  ascender: 16,
+  descender: 4,
+}
 ```
 
 ## License
