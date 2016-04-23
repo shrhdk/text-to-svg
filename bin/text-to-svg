@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+/**
+ * Copyright (c) 2016 Hideki Shiro
+ */
+
 var package = require('../package');
 
 var program = require('commander')

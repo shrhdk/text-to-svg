@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 Hideki Shiro
+ * Copyright (c) 2016 Hideki Shiro
  */
 
 'use strict';
