@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) 2016 Hideki Shiro
+ */
+
 'use strict';
 
 import assert from 'assert';
