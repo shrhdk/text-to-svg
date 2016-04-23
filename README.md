@@ -49,8 +49,8 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: `0`)
  - `fontSize`: Size of the text (default: `72`).
  - `kerning`: if `true` takes kerning information into account (default: `true`)
- - `anchor`: Anchor of object in coordinate. (default: `'baseline left'`)
-   - (`baseline`, `top`, `middle`, `bottom`) + (`left`, `center`, `right`)
+ - `anchor`: Anchor of object in coordinate. (default: `'left baseline'`)
+   - (`left`, `center`, `right`) + (`baseline`, `top`, `middle`, `bottom`)
 
 Return value example
 
@@ -70,8 +70,8 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: `0`)
  - `fontSize`: Size of the text (default: `72`).
  - `kerning`: if `true` takes kerning information into account (default: `true`)
- - `anchor`: Anchor of object in coordinate. (default: `'baseline left'`)
-   - (`baseline`, `top`, `middle`, `bottom`) + (`left`, `center`, `right`)
+ - `anchor`: Anchor of object in coordinate. (default: `'left baseline'`)
+   - (`left`, `center`, `right`) + (`baseline`, `top`, `middle`, `bottom`)
  - `attributes`: Key-Value pairs of attributes of `path` element.
 
 Return value example
@@ -92,8 +92,8 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: `0`)
  - `fontSize`: Size of the text (default: `72`).
  - `kerning`: if `true` takes kerning information into account (default: `true`)
- - `anchor`: Anchor of object in coordinate. (default: `'baseline left'`)
-   - (`baseline`, `top`, `middle`, `bottom`) + (`left`, `center`, `right`)
+ - `anchor`: Anchor of object in coordinate. (default: `'left baseline'`)
+   - (`left`, `center`, `right`) + (`baseline`, `top`, `middle`, `bottom`)
  - `attributes`: Key-Value pairs of attributes of `path` element.
 
 Return value example
