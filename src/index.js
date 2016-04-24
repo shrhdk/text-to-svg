@@ -95,9 +95,9 @@ export default class TextToSVG {
   }
 
   getPath(text, options = {}) {
-    options.attributes = options.attributes || {};
+    let attributes = options.attributes || {};
 
-    const attributes = Object.keys(options.attributes).map((key) => `${key}="${options.attributes[key]}"`).join(' ');
+    attributes = Object.keys(attributes).map(key => `${key}="${attributes[key]}"`).join(' ');
     const d = this.getD(text, options);
 
     if (attributes) {
@@ -117,6 +117,8 @@ export default class TextToSVG {
   }
 
   getDebugSVG(text, options = {}) {
+    options = JSON.parse(JSON.stringify(options));
+
     options.x = options.x || 0;
     options.y = options.y || 0;
     const size = this.getSize(text, options);
