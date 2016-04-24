@@ -22,6 +22,7 @@
   },
   "scripts": {
     "test": "gulp test",
+    "test:html": "gulp test:html",
     "clean": "gulp clean",
     "build": "gulp build"
   },

@@ -4,6 +4,8 @@
 
 'use strict';
 
+import fs from 'fs';
+import path from 'path';
 import assert from 'assert';
 import gulp from 'gulp';
 import del from 'del';
@@ -48,8 +50,14 @@ gulp.task('version-check', () => {
   }
 });
 
-gulp.task('test', ['build', 'version-check'], done => {
-  gulp.src('build/test/**/*.js')
+gulp.task('test', ['build', 'version-check'], () => {
+  return gulp.src('build/test/**/*.js')
     .pipe(mocha())
-    .on('end', done);
+});
+
+gulp.task('test:html', ['build', 'version-check'], () => {
+  const reporter = require('./build/test/html-reporter');
+  const dest = path.join(__dirname, './build/test/result.html');
+  return gulp.src('build/test/**/*.js')
+    .pipe(mocha({reporter, dest}));
 });
