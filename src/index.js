@@ -31,15 +31,54 @@ export default class TextToSVG {
   }
 
   getSize(text, options = {}) {
+    let x = options.x || 0;
+    let y = options.y || 0;
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
     const fontScale = 1 / this.font.unitsPerEm * fontSize;
+    const anchor = TextToSVG._parseAnchorOption(options.anchor || '');
+
+    const width = this._getWidth(text, fontScale, kerning);
+    const height = (this.font.ascender - this.font.descender) * fontScale;
+    const ascender = this.font.ascender * fontScale;
+    const descender = this.font.descender * fontScale;
+
+    switch (anchor.horizontal) {
+      case 'left':
+        x += 0;
+        break;
+      case 'center':
+        x -= width / 2;
+        break;
+      case 'right':
+        x -= width;
+        break;
+      default:
+        throw new Error(`Unknown anchor option: ${anchor.horizontal}`);
+    }
+
+    switch (anchor.vertical) {
+      case 'baseline':
+        y -= ascender;
+        break;
+      case 'top':
+        y -= 0;
+        break;
+      case 'middle':
+        y -= height / 2;
+        break;
+      case 'bottom':
+        y -= height;
+        break;
+      default:
+        throw new Error(`Unknown anchor option: ${anchor.vertical}`);
+    }
+
+    const baseline = y + ascender;
 
     return {
-      width: this._getWidth(text, fontScale, kerning),
-      height: (this.font.ascender - this.font.descender) * fontScale,
-      ascender: this.font.ascender * fontScale,
-      descender: this.font.descender * fontScale
+      x, y, baseline, width, height,
+      ascender, descender
     };
   }
 
@@ -49,41 +88,8 @@ export default class TextToSVG {
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
     const anchor = TextToSVG._parseAnchorOption(options.anchor || '');
-
-    const size = this.getSize(text, { fontSize, kerning });
-
-    switch (anchor.horizontal) {
-      case 'left':
-        x -= 0;
-        break;
-      case 'center':
-        x -= size.width / 2;
-        break;
-      case 'right':
-        x -= size.width;
-        break;
-      default:
-        throw new Error(`Unknown anchor option: ${anchor.horizontal}`);
-    }
-
-    switch (anchor.vertical) {
-      case 'baseline':
-        y += 0;
-        break;
-      case 'top':
-        y += size.ascender;
-        break;
-      case 'middle':
-        y += size.height / 2;
-        break;
-      case 'bottom':
-        y += size.descender;
-        break;
-      default:
-        throw new Error(`Unknown anchor option: ${anchor.vertical}`);
-    }
-
-    const path = this.font.getPath(text, x, y, fontSize, { kerning });
+    const size = this.getSize(text, options);
+    const path = this.font.getPath(text, size.x, size.baseline, fontSize, { kerning });
 
     return path.toPathData();
   }
