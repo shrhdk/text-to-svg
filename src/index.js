@@ -116,6 +116,32 @@ export default class TextToSVG {
     return svg;
   }
 
+  getDebugSVG(text, options = {}) {
+    options.x = options.x || 0;
+    options.y = options.y || 0;
+    const size = this.getSize(text, options);
+    const box = {
+      width: Math.max(size.x + size.width, 0) - Math.min(size.x, 0),
+      height: Math.max(size.y + size.height, 0) - Math.min(size.y, 0)
+    };
+    const origin = {
+      x: box.width - Math.max(size.x + size.width, 0),
+      y: box.height - Math.max(size.y + size.height, 0)
+    }
+
+    // Shift text based on origin
+    options.x += origin.x;
+    options.y += origin.y;
+
+    let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${box.width}" height="${box.height}">`;
+    svg += `<path fill="none" stroke="red" stroke-width="1" d="M0,${origin.y}L${box.width},${origin.y}"/>` // X Axis
+    svg += `<path fill="none" stroke="red" stroke-width="1" d="M${origin.x},0L${origin.x},${box.height}"/>` // Y Axis
+    svg += this.getPath(text, options);
+    svg += '</svg>';
+
+    return svg;
+  }
+
   _getWidth(text, fontScale, kerning) {
     let width = 0;
     const glyphs = this.font.stringToGlyphs(text);

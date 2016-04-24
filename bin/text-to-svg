@@ -14,6 +14,7 @@ const program = require('commander')
   .option('-s, --font-size <n>', 'font size', parseFloat)
   .option('-k, --kerning', 'kerning')
   .option('-a, --anchor [value]', 'anchor point')
+  .option('-d, --debug', 'debug')
   .parse(process.argv);
 
 if(program.args.length < 1) {
@@ -32,5 +33,12 @@ const options = {
 
 const TextToSVG = require('../build/src');
 const textToSVG = TextToSVG.loadSync();
-const svg = textToSVG.getSVG(text, options);
+
+var svg;
+if (!program.debug) {
+  svg = textToSVG.getSVG(text, options);
+} else {
+  svg = textToSVG.getDebugSVG(text, options);
+}
+
 console.log(svg);
