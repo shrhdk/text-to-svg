@@ -83,8 +83,6 @@ export default class TextToSVG {
   }
 
   getD(text, options = {}) {
-    let x = options.x || 0;
-    let y = options.y || 0;
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
     const anchor = TextToSVG._parseAnchorOption(options.anchor || '');
