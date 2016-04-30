@@ -11,11 +11,21 @@ import gulp from 'gulp';
 import del from 'del';
 import babel from 'gulp-babel';
 import mocha from 'gulp-mocha';
+import eslint from 'gulp-eslint';
 
 // Clean
 
 gulp.task('clean', done => {
   return del(['build', 'npm-debug.log', '!*/.gitkeep'], done);
+});
+
+// Lint
+
+gulp.task('lint', () => {
+  return gulp.src(['src/**/*.js', 'test/**/*.js', 'gulpfile.babel.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failOnError());
 });
 
 // Build
