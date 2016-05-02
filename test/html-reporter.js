@@ -117,3 +117,5 @@ export default function(runner, mochaOptions) {
     process.exit(failures);
   });
 }
+
+module.exports = exports.default;
