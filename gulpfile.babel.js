@@ -59,12 +59,12 @@ gulp.task('version-check', () => {
   }
 });
 
-gulp.task('test', ['build', 'version-check'], () => {
+gulp.task('test', ['build', 'lint', 'version-check'], () => {
   return gulp.src('build/test/**/*.js')
     .pipe(mocha());
 });
 
-gulp.task('test:html', ['build', 'version-check'], () => {
+gulp.task('test:html', ['build', 'lint', 'version-check'], () => {
   const reporter = require('./build/test/html-reporter');
   const dest = path.join(__dirname, './build/test/result.html');
   return gulp.src('build/test/**/*.js')
