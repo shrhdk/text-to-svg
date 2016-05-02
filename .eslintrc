@@ -183,8 +183,7 @@ rules: # 0: disable, 1: warn, 2: error
     },
     multiLine: {
       beforeColon: false,
-      afterColon: true,
-      align: 'value'
+      afterColon: true
     }
   }]
   keyword-spacing        : [2, {before: true, after: true}] # add space before/after keyword
@@ -192,7 +191,7 @@ rules: # 0: disable, 1: warn, 2: error
   lines-around-comment   : 2 # enforce empty lines around comments
   max-depth              : [1, {maximum: 5}] # max depth of block
   max-len                : [2, {
-    code: 200,
+    code: 12000,
     tabWidth: 2,
     ignoreUrls: true
   }] # max length of code
@@ -223,8 +222,8 @@ rules: # 0: disable, 1: warn, 2: error
   no-unneeded-ternary    : 2 # disallow the use of Boolean literals in conditional expressions
   no-whitespace-before-property: 2 # no whitespace before property
   object-curly-spacing   : [2, 'always', {
-    objectsInObjects: false,
-    arraysInObjects:  false
+    objectsInObjects: true,
+    arraysInObjects:  true
   }]
   one-var                : 0 # one ver per scope
   # one-var-declaration-per-line
@@ -248,7 +247,7 @@ rules: # 0: disable, 1: warn, 2: error
 
   # ECMAScript 6
   arrow-body-style       : 0 # rquire braces in arrow function body
-  arrow-parens           : 2 # require parens in arrow function arguments
+  arrow-parens           : 0 # require parens in arrow function arguments
   arrow-spacing          : [2, {before: true, after: true}] # require space before/after arrow function's arrow
   constructor-super      : 2 # verify calls of super() in constructors
   generator-star-spacing : [2, {before: false, after: true}] # enforce spacing around the * in generator functions

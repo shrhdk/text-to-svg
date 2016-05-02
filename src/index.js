@@ -2,14 +2,21 @@
  * Copyright (c) 2016 Hideki Shiro
  */
 
-'use strict';
-
-import path from 'path';
-import fs from 'fs';
-import assert from 'assert';
 import opentype from 'opentype.js';
 
-const DEFAULT_FONT = path.join(__dirname, '../fonts/ipag.ttf');
+const DEFAULT_FONT = require('path').join(__dirname, '../fonts/ipag.ttf');
+
+// Private method
+
+function parseAnchorOption(anchor) {
+  let horizontal = anchor.match(/left|center|right/gi) || [];
+  horizontal = horizontal.length === 0 ? 'left' : horizontal[0];
+
+  let vertical = anchor.match(/baseline|top|bottom|middle/gi) || [];
+  vertical = vertical.length === 0 ? 'baseline' : vertical[0];
+
+  return { horizontal, vertical };
+}
 
 export default class TextToSVG {
   constructor(font) {
@@ -22,27 +29,47 @@ export default class TextToSVG {
 
   static load(url, cb) {
     opentype.load(url, (err, font) => {
-      if (err != null) {
-        return cb(err, null)
+      if (err !== null) {
+        return cb(err, null);
       }
 
       return cb(null, new TextToSVG(font));
     });
   }
 
-  getSize(text, options = {}) {
-    let x = options.x || 0;
-    let y = options.y || 0;
-    const fontSize = options.fontSize || 72;
-    const kerning = 'kerning' in options ? options.kerning : true;
-    const fontScale = 1 / this.font.unitsPerEm * fontSize;
-    const anchor = TextToSVG._parseAnchorOption(options.anchor || '');
+  getWidth(text, fontScale, kerning) {
+    let width = 0;
+    const glyphs = this.font.stringToGlyphs(text);
+    for (let i = 0; i < glyphs.length; i++) {
+      const glyph = glyphs[i];
 
-    const width = this._getWidth(text, fontScale, kerning);
-    const height = (this.font.ascender - this.font.descender) * fontScale;
+      if (glyph.advanceWidth) {
+        width += glyph.advanceWidth * fontScale;
+      }
+
+      if (kerning && i < glyphs.length - 1) {
+        const kerningValue = this.font.getKerningValue(glyph, glyphs[i + 1]);
+        width += kerningValue * fontScale;
+      }
+    }
+    return width;
+  }
+
+  getHeight(fontScale) {
+    return (this.font.ascender - this.font.descender) * fontScale;
+  }
+
+  getSize(text, options = {}) {
+    const kerning = 'kerning' in options ? options.kerning : true;
+    const fontScale = 1 / this.font.unitsPerEm * (options.fontSize || 72);
+    const anchor = parseAnchorOption(options.anchor || '');
+
+    const width = this.getWidth(text, fontScale, kerning);
+    const height = this.getHeight(fontScale);
     const ascender = this.font.ascender * fontScale;
     const descender = this.font.descender * fontScale;
 
+    let x = options.x || 0;
     switch (anchor.horizontal) {
       case 'left':
         x += 0;
@@ -57,6 +84,7 @@ export default class TextToSVG {
         throw new Error(`Unknown anchor option: ${anchor.horizontal}`);
     }
 
+    let y = options.y || 0;
     switch (anchor.vertical) {
       case 'baseline':
         y -= ascender;
@@ -77,15 +105,19 @@ export default class TextToSVG {
     const baseline = y + ascender;
 
     return {
-      x, y, baseline, width, height,
-      ascender, descender
+      x,
+      y,
+      baseline,
+      width,
+      height,
+      ascender,
+      descender,
     };
   }
 
   getD(text, options = {}) {
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
-    const anchor = TextToSVG._parseAnchorOption(options.anchor || '');
     const size = this.getSize(text, options);
     const path = this.font.getPath(text, size.x, size.baseline, fontSize, { kerning });
 
@@ -100,13 +132,13 @@ export default class TextToSVG {
 
     if (attributes) {
       return `<path ${attributes} d="${d}"/>`;
-    } else {
-      return `<path d="${d}"/>`;
     }
+
+    return `<path d="${d}"/>`;
   }
 
   getSVG(text, options = {}) {
-    const size = this.getSize(text, options)
+    const size = this.getSize(text, options);
     let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${size.width}" height="${size.height}">`;
     svg += this.getPath(text, options);
     svg += '</svg>';
@@ -122,53 +154,25 @@ export default class TextToSVG {
     const size = this.getSize(text, options);
     const box = {
       width: Math.max(size.x + size.width, 0) - Math.min(size.x, 0),
-      height: Math.max(size.y + size.height, 0) - Math.min(size.y, 0)
+      height: Math.max(size.y + size.height, 0) - Math.min(size.y, 0),
     };
     const origin = {
       x: box.width - Math.max(size.x + size.width, 0),
-      y: box.height - Math.max(size.y + size.height, 0)
-    }
+      y: box.height - Math.max(size.y + size.height, 0),
+    };
 
     // Shift text based on origin
     options.x += origin.x;
     options.y += origin.y;
 
     let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${box.width}" height="${box.height}">`;
-    svg += `<path fill="none" stroke="red" stroke-width="1" d="M0,${origin.y}L${box.width},${origin.y}"/>` // X Axis
-    svg += `<path fill="none" stroke="red" stroke-width="1" d="M${origin.x},0L${origin.x},${box.height}"/>` // Y Axis
+    svg += `<path fill="none" stroke="red" stroke-width="1" d="M0,${origin.y}L${box.width},${origin.y}"/>`; // X Axis
+    svg += `<path fill="none" stroke="red" stroke-width="1" d="M${origin.x},0L${origin.x},${box.height}"/>`; // Y Axis
     svg += this.getPath(text, options);
     svg += '</svg>';
 
     return svg;
   }
-
-  _getWidth(text, fontScale, kerning) {
-    let width = 0;
-    const glyphs = this.font.stringToGlyphs(text);
-    for (let i = 0; i < glyphs.length; i++) {
-      const glyph = glyphs[i];
-
-      if (glyph.advanceWidth) {
-        width += glyph.advanceWidth * fontScale;
-      }
-
-      if (kerning && i < glyphs.length - 1) {
-        const kerningValue = this.font.getKerningValue(glyph, glyphs[i + 1]);
-        width += kerningValue * fontScale;
-      }
-    }
-    return width;
-  }
-
-  static _parseAnchorOption(anchor) {
-    let horizontal = anchor.match(/left|center|right/gi) || [];
-    horizontal = horizontal.length === 0 ? 'left' : horizontal[0];
-
-    let vertical = anchor.match(/baseline|top|bottom|middle/gi) || [];
-    vertical = vertical.length === 0 ? 'baseline' : vertical[0];
-
-    return { horizontal, vertical };
-  }
 }
 
-module.exports = exports['default'];
+module.exports = exports.default;

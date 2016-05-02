@@ -2,9 +2,8 @@
  * Copyright (c) 2016 Hideki Shiro
  */
 
-'use strict';
+/* eslint-disable no-process-env */
 
-import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
 import gulp from 'gulp';
@@ -12,6 +11,9 @@ import del from 'del';
 import babel from 'gulp-babel';
 import mocha from 'gulp-mocha';
 import eslint from 'gulp-eslint';
+
+import reporter from './build/test/html-reporter';
+const packageVer = require('./package.json').version;
 
 // Clean
 
@@ -32,7 +34,7 @@ gulp.task('lint', () => {
 
 gulp.task('build:src', () => {
   return gulp.src('src/**/*.js')
-    .pipe(babel({presets: ['es2015']}))
+    .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest('build/src/'));
 });
 
@@ -52,8 +54,7 @@ gulp.task('build', ['build:src', 'build:res', 'build:test:src']);
 // Test
 
 gulp.task('version-check', () => {
-  const packageVer = require('./package.json')['version'];
-  const tagVer = process.env['TRAVIS_TAG'];
+  const tagVer = process.env.TRAVIS_TAG;
 
   if (tagVer) {
     assert.equal(packageVer, tagVer, `Package version and tagged version are mismatched. Package version is ${packageVer}, but tagged version is ${tagVer}`);
@@ -62,12 +63,11 @@ gulp.task('version-check', () => {
 
 gulp.task('test', ['build', 'version-check'], () => {
   return gulp.src('build/test/**/*.js')
-    .pipe(mocha())
+    .pipe(mocha());
 });
 
 gulp.task('test:html', ['build', 'version-check'], () => {
-  const reporter = require('./build/test/html-reporter');
   const dest = path.join(__dirname, './build/test/result.html');
   return gulp.src('build/test/**/*.js')
-    .pipe(mocha({reporter, dest}));
+    .pipe(mocha({ reporter, dest }));
 });

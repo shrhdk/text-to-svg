@@ -2,7 +2,7 @@
  * Copyright (c) 2016 Hideki Shiro
  */
 
-'use strict';
+/* eslint-disable no-console,  */
 
 import fs from 'fs';
 import TextToSVG from '../src/index.js';
@@ -27,12 +27,12 @@ const STYLE = `
   }
 `;
 
-module.exports = function (runner, options) {
+export default function(runner, mochaOptions) {
   let passes = 0;
   let failures = 0;
   const stack = []; // 0:'TextToSVG' <- 1:'method' <- 2:'text' = [SP]
 
-  const dest = options.dest;
+  const dest = mochaOptions.dest;
   fs.writeFileSync(dest, '');
 
   console.log(`write test report to ${dest}`);
@@ -42,20 +42,19 @@ module.exports = function (runner, options) {
   }
 
   function ontest(test, err) {
-    const method = stack[1];
     const text = stack[2];
     const options = JSON.parse(test.title);
     const size = textToSVG.getSize(text, options);
     const d = textToSVG.getD(text, options);
     const svg = textToSVG.getDebugSVG(text, options);
 
-    if (!err) {
-      passes++;
-    } else {
+    if (err) {
       failures++;
+    } else {
+      passes++;
     }
 
-    write(`<tr class="${!err ? 'pass' : 'fail'}">`);
+    write(`<tr class="${err ? 'fail' : 'pass'}">`);
     write(`<td><pre>${JSON.stringify(options, null, 2)}</pre></td>`);
     write(`<td>${svg}</td>`);
     write(`<td><pre>${JSON.stringify(size, null, 2)}</pre></td>`);
@@ -76,7 +75,7 @@ module.exports = function (runner, options) {
     }
 
     stack.push(suite.title);
-    switch(stack.length - 1) {
+    switch (stack.length - 1) {
       case 0: // TextToSVG
         write(`<h1>${suite.title}</h1>`);
         break;
@@ -111,7 +110,7 @@ module.exports = function (runner, options) {
 
   runner.on('fail', (test, err) => {
     ontest(test, err);
-  })
+  });
 
   runner.on('end', () => {
     write('</body></html>');
