@@ -2,7 +2,7 @@
  * Copyright (c) 2016 Hideki Shiro
  */
 
-/* eslint-disable no-process-env */
+/* eslint-disable no-process-env, global-require */
 
 import path from 'path';
 import assert from 'assert';
@@ -11,9 +11,6 @@ import del from 'del';
 import babel from 'gulp-babel';
 import mocha from 'gulp-mocha';
 import eslint from 'gulp-eslint';
-
-import reporter from './build/test/html-reporter';
-const packageVer = require('./package.json').version;
 
 // Clean
 
@@ -54,6 +51,7 @@ gulp.task('build', ['build:src', 'build:res', 'build:test:src']);
 // Test
 
 gulp.task('version-check', () => {
+  const packageVer = require('./package.json').version;
   const tagVer = process.env.TRAVIS_TAG;
 
   if (tagVer) {
@@ -67,6 +65,7 @@ gulp.task('test', ['build', 'version-check'], () => {
 });
 
 gulp.task('test:html', ['build', 'version-check'], () => {
+  const reporter = require('./build/test/html-reporter');
   const dest = path.join(__dirname, './build/test/result.html');
   return gulp.src('build/test/**/*.js')
     .pipe(mocha({ reporter, dest }));
