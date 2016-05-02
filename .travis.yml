@@ -1,13 +1,13 @@
 language: node_js
 node_js:
-  - '5.3.0'
+- 6.0.0
 before_script:
-  - npm run build
+- npm run build
 deploy:
   provider: npm
   email: hideki@shiro.be
   api_key:
-    secure: m/W/s+3PdyRIfCXGE89Ok7oO41j+Vz7ZXHkH4XOc0X9BNHSGqadjh3kpHK/n+U97VPusYierzAJuGPYgS0sEu4EG6vkTuj+7i/aLtyCMF7QwYwWRv181LORIJo24MT7mukOWm0P6DIW54a/AOQYGxmD5Olkas7z1eSxKciztB6k=
+    secure: PZQK5WHTIV4hz9TTK/pJUgoDOyr9/C7OxoYNXw5vtKiwPHcUpQrHAu2gMYLhtUtE6f/I3sEhkFKj6ZFenGX8T9SnYKVBuh/X931Hd46ukcw8L5DSiaIRytLMP2zF5hhoxmagzj+KZ6IN1QzQdfTpTpFWyGgxNCtIfNPQPgXcw6s=
   on:
     tags: true
     all_branches: true
