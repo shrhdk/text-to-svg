@@ -37,7 +37,9 @@ export default class TextToSVG {
     });
   }
 
-  getWidth(text, fontScale, kerning) {
+  getWidth(text, fontSize, kerning) {
+    const fontScale = 1 / this.font.unitsPerEm * fontSize;
+
     let width = 0;
     const glyphs = this.font.stringToGlyphs(text);
     for (let i = 0; i < glyphs.length; i++) {
@@ -55,24 +57,27 @@ export default class TextToSVG {
     return width;
   }
 
-  getHeight(fontScale) {
+  getHeight(fontSize) {
+    const fontScale = 1 / this.font.unitsPerEm * fontSize;
     return (this.font.ascender - this.font.descender) * fontScale;
   }
 
   getSize(text, options = {}) {
+    const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
-    const fontScale = 1 / this.font.unitsPerEm * (options.fontSize || 72);
     const anchor = parseAnchorOption(options.anchor || '');
 
-    const width = this.getWidth(text, fontScale, kerning);
-    const height = this.getHeight(fontScale);
+    const width = this.getWidth(text, fontSize, kerning);
+    const height = this.getHeight(fontSize);
+
+    const fontScale = 1 / this.font.unitsPerEm * fontSize;
     const ascender = this.font.ascender * fontScale;
     const descender = this.font.descender * fontScale;
 
     let x = options.x || 0;
     switch (anchor.horizontal) {
       case 'left':
-        x += 0;
+        x -= 0;
         break;
       case 'center':
         x -= width / 2;
@@ -125,9 +130,9 @@ export default class TextToSVG {
   }
 
   getPath(text, options = {}) {
-    let attributes = options.attributes || {};
-
-    attributes = Object.keys(attributes).map(key => `${key}="${attributes[key]}"`).join(' ');
+    const attributes = Object.keys(options.attributes || {})
+      .map(key => `${key}="${attributes[key]}"`)
+      .join(' ');
     const d = this.getD(text, options);
 
     if (attributes) {

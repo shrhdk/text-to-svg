@@ -64,7 +64,7 @@ rules: # 0: disable, 1: warn, 2: error
   accessor-pairs         : 0 # get/setter in objects
   array-callback-return  : 2 # always return at array methods callback
   block-scoped-var       : 0 # allow var in block
-  complexity             : [1, 10] # cyclomatic complexity
+  complexity             : [1, 15] # cyclomatic complexity
   consistent-return      : 1 # no return without value
   curly                  : [2, 'multi-line'] # never omit brace in if,else,for,while,do
   default-case           : 2 # always use default in switch (or write # no default instead)
