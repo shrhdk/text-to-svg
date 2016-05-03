@@ -4,11 +4,14 @@
 
  - Simplify module layout
    - Please use `const TextToSVG = require('text-to-svg');`<br>instead of `const TextToSVG = require('text-to-svg').TextToSVG;`
+ - Add `loadSync` method.
+   - Please use `const textToSVG = TextToSVG.loadSync();`<br>instead of `const textToSVG = new TextToSVG();`
+ - Add `load` method for asynchronous font loading.
+ - Add `getMetrics` method instead of `getSize` method.
  - Correct vertical anchor option.
    - Correct `top` and `bottom`.
    - Add `baseline`.
  - Add `width` and `height` attribute to SVG element.
- - Add `ascender` and `descender` to result of `getSize` method.
 
 ## 2.2.2
 

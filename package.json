@@ -1,6 +1,6 @@
 {
   "name": "text-to-svg",
-  "version": "2.2.2",
+  "version": "3.0.0",
   "description": "Convert text to SVG path.",
   "main": "index.js",
   "files": [
