@@ -5,7 +5,7 @@
 /* eslint-disable no-console,  */
 
 import fs from 'fs';
-import TextToSVG from '../src/index.js';
+import TextToSVG from '../src';
 const textToSVG = TextToSVG.loadSync();
 
 const STYLE = `

@@ -3,7 +3,7 @@
  */
 
 import assert from 'assert';
-import TextToSVG from '../src/index.js';
+import TextToSVG from '../src';
 
 function assertAlmostEqual(a, b, epsilon) {
   assert.strictEqual(Math.abs(a - b) < epsilon, true);

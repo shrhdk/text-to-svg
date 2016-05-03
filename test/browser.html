@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>text-to-svg</title>
+    <script src="../build/test/browser.js"></script>
+</head>
+<body>
+    <h1>text-to-svg</h1>
+    <h2>Loader</h2>
+    <label for="font-url-input">Font URL</label> <input id="font-url-input" type="text" value="https://rawgit.com/shrhdk/text-to-svg/master/fonts/ipag.ttf" />
+    <button id="load-button">load</button>
+    <div id="load-status"></div>
+    <h2>Parameters</h2>
+    <table>
+        <tr>
+            <th><label for="text-input">text</label></th>
+            <td><input id="text-input" type="text" value="hello" /></td>
+        </tr>
+        <tr>
+            <th><label for="x-input">x</label></th>
+            <td><input id="x-input" type="text" /></td>
+        </tr>
+        <tr>
+            <th><label for="y-input">y</label></th>
+            <td><input id="y-input" type="text" /></td>
+        </tr>
+        <tr>
+            <th><label for="font-size-input">font size</label></th>
+            <td><input id="font-size-input" type="text" /></td>
+        </tr>
+        <tr>
+            <th><label for="kerning-input">kerning</label></th>
+            <td><input id="kerning-input" type="checkbox" /></td>
+        </tr>
+        <tr>
+            <th><label for="anchor-input">anchor</label></th>
+            <td><input id="anchor-input" type="text" value="top" /></td>
+        </tr>
+    </table>
+    <h2>Result</h2>
+    <input id="debug-input" type="checkbox" /><label for="debug-input">debug</label>
+    <button id="get-svg-button">getSVG</button>
+    <div id="result" />
+</body>
+</html>

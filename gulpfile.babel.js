@@ -11,6 +11,8 @@ import del from 'del';
 import babel from 'gulp-babel';
 import mocha from 'gulp-mocha';
 import eslint from 'gulp-eslint';
+import browserify from 'browserify';
+import source from 'vinyl-source-stream';
 
 // Clean
 
@@ -46,7 +48,14 @@ gulp.task('build:test:src', () => {
     .pipe(gulp.dest('build/test/'));
 });
 
-gulp.task('build', ['build:src', 'build:res', 'build:test:src']);
+gulp.task('build:test:browser', () => {
+  browserify('./build/test/browser.js')
+    .bundle()
+    .pipe(source('browser.js'))
+    .pipe(gulp.dest('build/test'));
+});
+
+gulp.task('build', ['build:src', 'build:res', 'build:test:src', 'build:test:browser']);
 
 // Test
 
@@ -60,13 +69,13 @@ gulp.task('version-check', () => {
 });
 
 gulp.task('test', ['build', 'lint', 'version-check'], () => {
-  return gulp.src('build/test/**/*.js')
+  return gulp.src('build/test/index.js')
     .pipe(mocha());
 });
 
 gulp.task('test:html', ['build', 'lint', 'version-check'], () => {
   const reporter = require('./build/test/html-reporter');
   const dest = path.join(__dirname, './build/test/result.html');
-  return gulp.src('build/test/**/*.js')
+  return gulp.src('build/test/index.js')
     .pipe(mocha({ reporter, dest }));
 });
