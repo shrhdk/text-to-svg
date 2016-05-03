@@ -44,7 +44,7 @@ export default function(runner, mochaOptions) {
   function ontest(test, err) {
     const text = stack[2];
     const options = JSON.parse(test.title);
-    const size = textToSVG.getSize(text, options);
+    const metrics = textToSVG.getMetrics(text, options);
     const d = textToSVG.getD(text, options);
     const svg = textToSVG.getDebugSVG(text, options);
 
@@ -57,7 +57,7 @@ export default function(runner, mochaOptions) {
     write(`<tr class="${err ? 'fail' : 'pass'}">`);
     write(`<td><pre>${JSON.stringify(options, null, 2)}</pre></td>`);
     write(`<td>${svg}</td>`);
-    write(`<td><pre>${JSON.stringify(size, null, 2)}</pre></td>`);
+    write(`<td><pre>${JSON.stringify(metrics, null, 2)}</pre></td>`);
     write(`<td><pre>${d}</pre></td>`);
     write('</tr>');
   }
@@ -88,7 +88,7 @@ export default function(runner, mochaOptions) {
         write('<tr>');
         write('<th>options</th>');
         write('<th>svg</th>');
-        write('<th>getSize</th>');
+        write('<th>getMetrics</th>');
         write('<th>getD</th>');
         write('</tr>');
         break;

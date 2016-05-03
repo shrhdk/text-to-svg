@@ -62,7 +62,7 @@ export default class TextToSVG {
     return (this.font.ascender - this.font.descender) * fontScale;
   }
 
-  getSize(text, options = {}) {
+  getMetrics(text, options = {}) {
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
     const anchor = parseAnchorOption(options.anchor || '');
@@ -123,8 +123,8 @@ export default class TextToSVG {
   getD(text, options = {}) {
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
-    const size = this.getSize(text, options);
-    const path = this.font.getPath(text, size.x, size.baseline, fontSize, { kerning });
+    const metrics = this.getMetrics(text, options);
+    const path = this.font.getPath(text, metrics.x, metrics.baseline, fontSize, { kerning });
 
     return path.toPathData();
   }
@@ -143,8 +143,8 @@ export default class TextToSVG {
   }
 
   getSVG(text, options = {}) {
-    const size = this.getSize(text, options);
-    let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${size.width}" height="${size.height}">`;
+    const metrics = this.getMetrics(text, options);
+    let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${metrics.width}" height="${metrics.height}">`;
     svg += this.getPath(text, options);
     svg += '</svg>';
 
@@ -156,14 +156,14 @@ export default class TextToSVG {
 
     options.x = options.x || 0;
     options.y = options.y || 0;
-    const size = this.getSize(text, options);
+    const metrics = this.getMetrics(text, options);
     const box = {
-      width: Math.max(size.x + size.width, 0) - Math.min(size.x, 0),
-      height: Math.max(size.y + size.height, 0) - Math.min(size.y, 0),
+      width: Math.max(metrics.x + metrics.width, 0) - Math.min(metrics.x, 0),
+      height: Math.max(metrics.y + metrics.height, 0) - Math.min(metrics.y, 0),
     };
     const origin = {
-      x: box.width - Math.max(size.x + size.width, 0),
-      y: box.height - Math.max(size.y + size.height, 0),
+      x: box.width - Math.max(metrics.x + metrics.width, 0),
+      y: box.height - Math.max(metrics.y + metrics.height, 0),
     };
 
     // Shift text based on origin

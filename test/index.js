@@ -15,10 +15,10 @@ class TextToSVGTest {
     this.text = text;
   }
 
-  getSize(options, expected) {
+  getMetrics(options, expected) {
     const epsilon = 0.001;
     const title = JSON.stringify(options);
-    const actual = this.textToSVG.getSize(this.text, options);
+    const actual = this.textToSVG.getMetrics(this.text, options);
 
     it(title, () => {
       assertAlmostEqual(actual.width, expected.width, epsilon);
@@ -37,29 +37,29 @@ class TextToSVGTest {
 }
 
 describe('TextToSVG', () => {
-  describe('getSize', () => {
+  describe('getMetrics', () => {
     describe('hello', () => {
       const hello = new TextToSVGTest('hello');
 
-      hello.getSize({}, { x: 0, y: -63.3515625, baseline: 0, width: 180, height: 72, ascender: 63.3515625, descender: -8.6484375 });
+      hello.getMetrics({}, { x: 0, y: -63.3515625, baseline: 0, width: 180, height: 72, ascender: 63.3515625, descender: -8.6484375 });
 
-      hello.getSize({ fontSize: 10 }, { x: 0, y: -8.798828125, baseline: 0, width: 25, height: 10, ascender: 8.798828125, descender: -1.201171875 });
-      hello.getSize({ fontSize: 100 }, { x: 0, y: -87.98828125, baseline: 0, width: 250, height: 100, ascender: 87.98828125, descender: -12.01171875 });
+      hello.getMetrics({ fontSize: 10 }, { x: 0, y: -8.798828125, baseline: 0, width: 25, height: 10, ascender: 8.798828125, descender: -1.201171875 });
+      hello.getMetrics({ fontSize: 100 }, { x: 0, y: -87.98828125, baseline: 0, width: 250, height: 100, ascender: 87.98828125, descender: -12.01171875 });
 
-      hello.getSize({ kerning: false }, { x: 0, y: -63.3515625, baseline: 0, width: 180, height: 72, ascender: 63.3515625, descender: -8.6484375 });
-      hello.getSize({ kerning: true }, { x: 0, y: -63.3515625, baseline: 0, width: 180, height: 72, ascender: 63.3515625, descender: -8.6484375 });
+      hello.getMetrics({ kerning: false }, { x: 0, y: -63.3515625, baseline: 0, width: 180, height: 72, ascender: 63.3515625, descender: -8.6484375 });
+      hello.getMetrics({ kerning: true }, { x: 0, y: -63.3515625, baseline: 0, width: 180, height: 72, ascender: 63.3515625, descender: -8.6484375 });
     });
 
     describe('宇治', () => {
       const uji = new TextToSVGTest('宇治');
 
-      uji.getSize({}, { x: 0, y: -63.3515625, baseline: 0, width: 144, height: 72, ascender: 63.3515625, descender: -8.6484375 });
+      uji.getMetrics({}, { x: 0, y: -63.3515625, baseline: 0, width: 144, height: 72, ascender: 63.3515625, descender: -8.6484375 });
 
-      uji.getSize({ fontSize: 10 }, { x: 0, y: -8.798828125, baseline: 0, width: 20, height: 10, ascender: 8.798828125, descender: -1.201171875 });
-      uji.getSize({ fontSize: 100 }, { x: 0, y: -87.98828125, baseline: 0, width: 200, height: 100, ascender: 87.98828125, descender: -12.01171875 });
+      uji.getMetrics({ fontSize: 10 }, { x: 0, y: -8.798828125, baseline: 0, width: 20, height: 10, ascender: 8.798828125, descender: -1.201171875 });
+      uji.getMetrics({ fontSize: 100 }, { x: 0, y: -87.98828125, baseline: 0, width: 200, height: 100, ascender: 87.98828125, descender: -12.01171875 });
 
-      uji.getSize({ kerning: false }, { x: 0, y: -63.3515625, baseline: 0, width: 144, height: 72, ascender: 63.3515625, descender: -8.6484375 });
-      uji.getSize({ kerning: true }, { x: 0, y: -63.3515625, baseline: 0, width: 144, height: 72, ascender: 63.3515625, descender: -8.6484375 });
+      uji.getMetrics({ kerning: false }, { x: 0, y: -63.3515625, baseline: 0, width: 144, height: 72, ascender: 63.3515625, descender: -8.6484375 });
+      uji.getMetrics({ kerning: true }, { x: 0, y: -63.3515625, baseline: 0, width: 144, height: 72, ascender: 63.3515625, descender: -8.6484375 });
     });
   });
 
