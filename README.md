@@ -156,6 +156,15 @@ An example of return value.
 
 MIT
 
+## Thanks
+
+text-to-svg depends on the following softwares. I thank great authors a lot.
+
+- [opentype.js](https://github.com/nodebox/opentype.js): Copyright (c) 2015 Frederik De Bleser
+- [commander](https://github.com/tj/commander.js): Copyright (c) 2011 TJ Holowaychuk <tj@vision-media.ca>
+
+These are released under the [MIT license](https://opensource.org/licenses/MIT)
+
 [npm-url]: https://npmjs.org/package/text-to-svg
 [npm-image]: https://badge.fury.io/js/text-to-svg.svg
 [travis-url]: https://travis-ci.org/shrhdk/text-to-svg
