@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.1
+
+ - Fix #10
+
 ## 3.0.0
 
  - Simplify module layout

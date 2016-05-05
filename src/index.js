@@ -131,7 +131,7 @@ export default class TextToSVG {
 
   getPath(text, options = {}) {
     const attributes = Object.keys(options.attributes || {})
-      .map(key => `${key}="${attributes[key]}"`)
+      .map(key => `${key}="${options.attributes[key]}"`)
       .join(' ');
     const d = this.getD(text, options);
 
