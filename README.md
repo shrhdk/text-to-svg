@@ -71,6 +71,8 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: `0`)
  - `fontSize`: Size of the text (default: `72`).
  - `kerning`: if `true` takes kerning information into account (default: `true`)
+ - `letterSpacing`: letter-spacing value in `em`.
+ - `tracking`: tracking value. (em / 1000)
  - `anchor`: Anchor of object in coordinate. (default: `'left baseline'`)
    - (`left`, `center`, `right`) + (`baseline`, `top`, `middle`, `bottom`)
 
@@ -92,6 +94,8 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: `0`)
  - `fontSize`: Size of the text (default: `72`).
  - `kerning`: if `true` takes kerning information into account (default: `true`)
+ - `letterSpacing`: letter-spacing value in `em`.
+ - `tracking`: tracking value. (em / 1000)
  - `anchor`: Anchor of object in coordinate. (default: `'left baseline'`)
    - (`left`, `center`, `right`) + (`baseline`, `top`, `middle`, `bottom`)
  - `attributes`: Key-Value pairs of attributes of `path` element.
@@ -114,6 +118,8 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: `0`)
  - `fontSize`: Size of the text (default: `72`).
  - `kerning`: if `true` takes kerning information into account (default: `true`)
+ - `letterSpacing`: letter-spacing value in `em`.
+ - `tracking`: tracking value. (em / 1000)
  - `anchor`: Anchor of object in coordinate. (default: `'left baseline'`)
    - (`left`, `center`, `right`) + (`baseline`, `top`, `middle`, `bottom`)
  - `attributes`: Key-Value pairs of attributes of `path` element.
@@ -136,6 +142,8 @@ Options is an optional object containing:
  - `y`: Vertical position of the baseline of the text. (default: `0`)
  - `fontSize`: Size of the text (default: `72`).
  - `kerning`: if `true` takes kerning information into account (default: `true`)
+ - `letterSpacing`: letter-spacing value in `em`.
+ - `tracking`: tracking value. (em / 1000)
  - `anchor`: Anchor of object in coordinate. (default: `'left baseline'`)
 
 An example of return value.
@@ -156,7 +164,7 @@ An example of return value.
 
 MIT
 
-## Thanks
+## Credits
 
 text-to-svg depends on the following softwares. I thank great authors a lot.
 
