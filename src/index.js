@@ -37,7 +37,9 @@ export default class TextToSVG {
     });
   }
 
-  getWidth(text, fontSize, kerning) {
+  getWidth(text, options) {
+    const fontSize = options.fontSize || 72;
+    const kerning = 'kerning' in options ? options.kerning : true;
     const fontScale = 1 / this.font.unitsPerEm * fontSize;
 
     let width = 0;
@@ -53,6 +55,12 @@ export default class TextToSVG {
         const kerningValue = this.font.getKerningValue(glyph, glyphs[i + 1]);
         width += kerningValue * fontScale;
       }
+
+      if (options.letterSpacing) {
+        width += options.letterSpacing * fontSize;
+      } else if (options.tracking) {
+        width += (options.tracking / 1000) * fontSize;
+      }
     }
     return width;
   }
@@ -64,10 +72,9 @@ export default class TextToSVG {
 
   getMetrics(text, options = {}) {
     const fontSize = options.fontSize || 72;
-    const kerning = 'kerning' in options ? options.kerning : true;
     const anchor = parseAnchorOption(options.anchor || '');
 
-    const width = this.getWidth(text, fontSize, kerning);
+    const width = this.getWidth(text, options);
     const height = this.getHeight(fontSize);
 
     const fontScale = 1 / this.font.unitsPerEm * fontSize;
@@ -123,8 +130,10 @@ export default class TextToSVG {
   getD(text, options = {}) {
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
+    const letterSpacing = 'letterSpacing' in options ? options.letterSpacing : false;
+    const tracking = 'tracking' in options ? options.tracking : false;
     const metrics = this.getMetrics(text, options);
-    const path = this.font.getPath(text, metrics.x, metrics.baseline, fontSize, { kerning });
+    const path = this.font.getPath(text, metrics.x, metrics.baseline, fontSize, { kerning, letterSpacing, tracking });
 
     return path.toPathData();
   }
