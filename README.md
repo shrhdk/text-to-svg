@@ -2,7 +2,7 @@
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][dependency-image]][dependency-url] [![Gitter][gitter-image]][gitter-url]
 
-Convert text to SVG path without native dependencies.
+Convert text to SVG path without native dependence.
 
 ```js
 const TextToSVG = require('text-to-svg');

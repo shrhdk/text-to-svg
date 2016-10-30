@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 3.1.0
+
+ - Support letter-spacing option.
+ - Support tracking option.
+
 ## 3.0.1
 
  - Fix #10
