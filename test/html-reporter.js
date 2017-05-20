@@ -28,7 +28,6 @@ const STYLE = `
 `;
 
 export default function(runner, mochaOptions) {
-  let passes = 0;
   let failures = 0;
   const stack = []; // 0:'TextToSVG' <- 1:'method' <- 2:'text' = [SP]
 
@@ -49,8 +48,6 @@ export default function(runner, mochaOptions) {
 
     if (err) {
       failures++;
-    } else {
-      passes++;
     }
 
     write(`<tr class="${err ? 'fail' : 'pass'}">`);
