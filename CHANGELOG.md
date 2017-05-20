@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 3.1.1
+
+ - Tested on Node.js v6.10.3
+ - Update dependencies.
+   - `opentype.js`: `0.6.6` -> `0.7.1`
+
 ## 3.1.0
 
  - Support letter-spacing option.
