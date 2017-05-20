@@ -32,10 +32,9 @@ export default function(runner, mochaOptions) {
   let failures = 0;
   const stack = []; // 0:'TextToSVG' <- 1:'method' <- 2:'text' = [SP]
 
-  const dest = mochaOptions.dest;
-  fs.writeFileSync(dest, '');
-
+  const dest = mochaOptions.reporterOptions.dest;
   console.log(`write test report to ${dest}`);
+  fs.writeFileSync(dest, '');
 
   function write(str) {
     fs.appendFileSync(dest, str);
@@ -63,8 +62,11 @@ export default function(runner, mochaOptions) {
   }
 
   runner.on('start', () => {
-    write('<html>');
-    write('<head><title>TextToSVG</title></head>');
+    write('<html >');
+    write('<head>');
+    write('<meta charset="UTF-8" />');
+    write('<title>TextToSVG</title>');
+    write('</head>');
     write('<body>');
     write(`<style>${STYLE}</style>`);
   });

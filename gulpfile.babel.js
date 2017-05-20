@@ -74,8 +74,8 @@ gulp.task('test', ['build', 'lint', 'version-check'], () => {
 });
 
 gulp.task('test:html', ['build', 'lint', 'version-check'], () => {
-  const reporter = require('./build/test/html-reporter');
+  const reporter = path.join(__dirname, './build/test/html-reporter.js');
   const dest = path.join(__dirname, './build/test/result.html');
   return gulp.src('build/test/index.js')
-    .pipe(mocha({ reporter, dest }));
+    .pipe(mocha({ reporter, reporterOptions: { dest } }));
 });
