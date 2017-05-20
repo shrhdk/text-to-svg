@@ -19,15 +19,8 @@ ecmaFeatures:
 parserOptions:
   sourceType: "module"
 
-plugins:
-  - classes
-
 # see: http:#eslint.org/docs/rules/
 rules: # 0: disable, 1: warn, 2: error
-
-  # Plugins ($ npm install eslint-plugin-{name})
-  classes/space          : 2
-  classes/name           : [ 2, 'class', 'method' ]
 
   # Possible Errors
   comma-dangle           : [ 2, 'always-multiline' ]  # no trailing comma at last prop
