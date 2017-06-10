@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.1.2
+
+ - Pin opentype.js version to `0.7.1`. (see #25)
+
 ## 3.1.1
 
  - Tested on Node.js v6.10.3
