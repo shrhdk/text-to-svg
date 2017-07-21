@@ -2,7 +2,7 @@
  * Copyright (c) 2016 Hideki Shiro
  */
 
-import opentype from 'opentype.js';
+import * as opentype from 'opentype.js';
 
 const DEFAULT_FONT = require('path').join(__dirname, '../fonts/ipag.ttf');
 
