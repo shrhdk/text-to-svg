@@ -74,7 +74,10 @@ export default class TextToSVG {
     const fontSize = options.fontSize || 72;
     const anchor = parseAnchorOption(options.anchor || '');
 
-    const width = this.getWidth(text, options);
+    let width = this.getWidth(text, options);
+    if (options.shadow) {
+      width += 20;
+    }
     const height = this.getHeight(fontSize);
 
     const fontScale = 1 / this.font.unitsPerEm * fontSize;
@@ -145,15 +148,26 @@ export default class TextToSVG {
     const d = this.getD(text, options);
 
     if (attributes) {
-      return `<path ${attributes} d="${d}"/>`;
+      return `<path ${attributes} filter="url(#f3)" d="${d}"/>`;
     }
 
-    return `<path d="${d}"/>`;
+    return `<path filter="url(#f3)" d="${d}"/>`;
   }
 
   getSVG(text, options = {}) {
     const metrics = this.getMetrics(text, options);
     let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${metrics.width}" height="${metrics.height}">`;
+
+    // hard coded the offsets for me
+    // make sure to set x="-10%" if you want to see shadow on the left of the original text
+    if (options.shadow) {
+      svg += `<defs><filter id="f3" x="-10%" y="0" width="200%" height="200%">`;
+      svg += `<feOffset result="offOut" in="SourceAlpha" dx="2" dy="3" />`;
+      svg += `<feGaussianBlur result="blurOut" in="offOut" stdDeviation="4" />`;
+      svg += `<feBlend in="SourceGraphic" in2="blurOut" mode="normal" />`;
+      svg += `</filter></defs>`;      
+    }
+
     svg += this.getPath(text, options);
     svg += '</svg>';
 
