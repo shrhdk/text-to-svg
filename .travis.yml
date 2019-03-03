@@ -7,7 +7,7 @@ deploy:
   provider: npm
   email: hideki@shiro.be
   api_key:
-    secure: PZQK5WHTIV4hz9TTK/pJUgoDOyr9/C7OxoYNXw5vtKiwPHcUpQrHAu2gMYLhtUtE6f/I3sEhkFKj6ZFenGX8T9SnYKVBuh/X931Hd46ukcw8L5DSiaIRytLMP2zF5hhoxmagzj+KZ6IN1QzQdfTpTpFWyGgxNCtIfNPQPgXcw6s=
+    secure: b7672QRwmjSAu/bcPt5Z7ykjp+Rm8cV7+wZDDDhI/yZRqcgNHmvoyIFUYPYJBxJMam/ZM7clbm/MDqDKSB0FuGGw+eAsZXMiitkMu40ewwxMML3w8y+ZiMnp0rYwvvIGUf/Xt1hp0Myzrv5Mm0/WFYkTQ76fOPk85KZBHxtCj7I=
   on:
     tags: true
     all_branches: true
