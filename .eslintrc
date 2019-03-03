@@ -8,8 +8,6 @@ env:
   mocha   : true
   es6     : true
 
-ecmaVersion: 6
-
 ecmaFeatures:
   globalReturn     : true
   impliedStrict    : true
@@ -17,6 +15,7 @@ ecmaFeatures:
   experimentalObjectRestSpread : true
 
 parserOptions:
+  ecmaVersion: 6
   sourceType: "module"
 
 # see: http:#eslint.org/docs/rules/

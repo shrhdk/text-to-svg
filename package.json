@@ -47,25 +47,26 @@
   "homepage": "https://github.com/shrhdk/text-to-svg",
   "dependencies": {
     "commander": "^2.11.0",
-    "opentype.js": "0.7.3"
+    "opentype.js": "0.11.0"
   },
   "devDependencies": {
-    "babel-core": "^6.7.2",
-    "babel-preset-es2015": "^6.6.0",
-    "browserify": "^14.3.0",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
+    "browserify": "^16.2.3",
     "del": "^3.0.0",
     "eslint-plugin-arrow-function": "^2.0.0",
     "eslint-plugin-classes": "^0.1.1",
     "eslint-plugin-template-string": "^1.0.0",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^6.1.1",
-    "gulp-eslint": "^3.0.1",
-    "gulp-mocha": "^4.3.1",
-    "vinyl-source-stream": "^1.1.0"
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-mocha": "^6.0.0",
+    "vinyl-source-stream": "^2.0.0"
   },
   "babel": {
     "presets": [
-      "es2015"
+      "@babel/preset-env"
     ]
   }
 }

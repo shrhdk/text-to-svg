@@ -33,7 +33,7 @@ gulp.task('lint', () => {
 
 gulp.task('build:src', () => {
   return gulp.src('src/**/*.js')
-    .pipe(babel({ presets: ['es2015'] }))
+    .pipe(babel())
     .pipe(gulp.dest('build/src/'));
 });
 
@@ -49,33 +49,33 @@ gulp.task('build:test:src', () => {
 });
 
 gulp.task('build:test:browser', () => {
-  browserify('./build/test/browser.js')
+  return browserify('./build/test/browser.js')
     .bundle()
     .pipe(source('browser.js'))
     .pipe(gulp.dest('build/test'));
 });
 
-gulp.task('build', ['build:src', 'build:res', 'build:test:src', 'build:test:browser']);
+gulp.task('build', gulp.series('build:src', 'build:res', 'build:test:src', 'build:test:browser'));
 
 // Test
 
-gulp.task('version-check', () => {
+gulp.task('version-check', done => {
   const packageVer = require('./package.json').version;
   const tagVer = process.env.TRAVIS_TAG;
-
   if (tagVer) {
     assert.equal(packageVer, tagVer, `Package version and tagged version are mismatched. Package version is ${packageVer}, but tagged version is ${tagVer}`);
   }
+  done();
 });
 
-gulp.task('test', ['build', 'lint', 'version-check'], () => {
+gulp.task('test', gulp.series(gulp.parallel('build', 'lint', 'version-check'), () => {
   return gulp.src('build/test/index.js')
     .pipe(mocha());
-});
+}));
 
-gulp.task('test:html', ['build', 'lint', 'version-check'], () => {
+gulp.task('test:html', gulp.series(gulp.parallel('build', 'lint', 'version-check'), () => {
   const reporter = path.join(__dirname, './build/test/html-reporter.js');
   const dest = path.join(__dirname, './build/test/result.html');
   return gulp.src('build/test/index.js')
     .pipe(mocha({ reporter, reporterOptions: { dest } }));
-});
+}));
