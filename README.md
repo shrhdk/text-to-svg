@@ -1,6 +1,6 @@
 # text-to-svg
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][dependency-image]][dependency-url] [![Gitter][gitter-image]][gitter-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
 Convert text to SVG path without native dependence.
 
@@ -177,7 +177,5 @@ These are released under the [MIT license](https://opensource.org/licenses/MIT)
 [npm-image]: https://badge.fury.io/js/text-to-svg.svg
 [travis-url]: https://travis-ci.org/shrhdk/text-to-svg
 [travis-image]: https://travis-ci.org/shrhdk/text-to-svg.svg?branch=master
-[dependency-url]: https://gemnasium.com/shrhdk/text-to-svg
-[dependency-image]: https://gemnasium.com/shrhdk/text-to-svg.svg
 [gitter-url]: https://gitter.im/shrhdk/text-to-svg
 [gitter-image]: https://badges.gitter.im/Join%20Chat.svg
