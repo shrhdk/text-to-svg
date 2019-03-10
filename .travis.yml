@@ -4,6 +4,7 @@ node_js:
 before_script:
 - npm run build
 deploy:
+  skip_cleanup: true
   provider: npm
   email: hideki@shiro.be
   api_key:
