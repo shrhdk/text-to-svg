@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## 3.1.4
+## 3.1.5
+
+ - Fix deployment script.
+
+## ~~3.1.4~~
+
+**This version had been failed to deploy. So do not use this version.**
 
  - Tested on Node.js v10.15.2
  - Update dependencies.
