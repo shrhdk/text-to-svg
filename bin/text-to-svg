@@ -26,7 +26,7 @@ const text = program.args[0];
 const options = {
   x: program.x || 0,
   y: program.y || 0,
-  fontSize: program.size || 72,
+  fontSize: program.fontSize || 72,
   kerning: program.kerning,
   anchor: program.anchor || ''
 };
