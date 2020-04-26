@@ -128,6 +128,10 @@ export default class TextToSVG {
   }
 
   getD(text, options = {}) {
+    return this.getDAndMetcis(text, options).d;
+  }
+
+  getDAndMetcis(text, options = {}) {
     const fontSize = options.fontSize || 72;
     const kerning = 'kerning' in options ? options.kerning : true;
     const letterSpacing = 'letterSpacing' in options ? options.letterSpacing : false;
@@ -135,20 +139,27 @@ export default class TextToSVG {
     const metrics = this.getMetrics(text, options);
     const path = this.font.getPath(text, metrics.x, metrics.baseline, fontSize, { kerning, letterSpacing, tracking });
 
-    return path.toPathData();
+    const d = path.toPathData();
+    return { d, metrics };
   }
 
   getPath(text, options = {}) {
+    return this.getPathAndMetrics(text, options).path;
+  }
+
+  getPathAndMetrics(text, options = {}) {
     const attributes = Object.keys(options.attributes || {})
       .map(key => `${key}="${options.attributes[key]}"`)
       .join(' ');
-    const d = this.getD(text, options);
+    const { d, metrics } = this.getDAndMetcis(text, options);
 
+    let path;
     if (attributes) {
-      return `<path ${attributes} d="${d}"/>`;
+      path = `<path ${attributes} d="${d}"/>`;
+    } else {
+      path = `<path d="${d}"/>`;
     }
-
-    return `<path d="${d}"/>`;
+    return { path, metrics };
   }
 
   getSVG(text, options = {}) {
@@ -156,9 +167,9 @@ export default class TextToSVG {
   }
 
   getSVGAndMetrics(text, options = {}) {
-    const metrics = this.getMetrics(text, options);
+    const { path, metrics } = this.getPathAndMetrics(text, options);
     let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${metrics.width}" height="${metrics.height}">`;
-    svg += this.getPath(text, options);
+    svg += path;
     svg += '</svg>';
 
     return { svg, metrics };
@@ -169,7 +180,7 @@ export default class TextToSVG {
 
     options.x = options.x || 0;
     options.y = options.y || 0;
-    const metrics = this.getMetrics(text, options);
+    const { path, metrics } = this.getPathAndMetrics(text, options);
     const box = {
       width: Math.max(metrics.x + metrics.width, 0) - Math.min(metrics.x, 0),
       height: Math.max(metrics.y + metrics.height, 0) - Math.min(metrics.y, 0),
@@ -186,7 +197,7 @@ export default class TextToSVG {
     let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${box.width}" height="${box.height}">`;
     svg += `<path fill="none" stroke="red" stroke-width="1" d="M0,${origin.y}L${box.width},${origin.y}"/>`; // X Axis
     svg += `<path fill="none" stroke="red" stroke-width="1" d="M${origin.x},0L${origin.x},${box.height}"/>`; // Y Axis
-    svg += this.getPath(text, options);
+    svg += path;
     svg += '</svg>';
 
     return svg;
