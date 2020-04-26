@@ -152,12 +152,16 @@ export default class TextToSVG {
   }
 
   getSVG(text, options = {}) {
+    return this.getSVGAndMetrics(text, options).svg;
+  }
+
+  getSVGAndMetrics(text, options = {}) {
     const metrics = this.getMetrics(text, options);
     let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${metrics.width}" height="${metrics.height}">`;
     svg += this.getPath(text, options);
     svg += '</svg>';
 
-    return svg;
+    return { svg, metrics };
   }
 
   getDebugSVG(text, options = {}) {
