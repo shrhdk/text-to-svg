@@ -30,7 +30,7 @@ $ npm install --save text-to-svg
 
 ## Constructor
 
-An example for loading default font synchronously. The default font is [IPA font](http://ipafont.ipa.go.jp/). ** This method only works on Node.js. **
+An example for loading default font synchronously. The default font is [IPA font](http://ipafont.ipa.go.jp/). **This method only works on Node.js.**
 
 ```js
 const textToSVG = TextToSVG.loadSync();
@@ -38,7 +38,7 @@ const svg = textToSVG.getSVG('hello');
 console.log(svg);
 ```
 
-An example for loading font synchronously. ** This method only works on Node.js. **
+An example for loading font synchronously. **This method only works on Node.js.**
 
 ```js
 // Argument is file path (NOT URL)
