@@ -133,7 +133,7 @@ export default class TextToSVG {
     const letterSpacing = 'letterSpacing' in options ? options.letterSpacing : false;
     const tracking = 'tracking' in options ? options.tracking : false;
     const metrics = this.getMetrics(text, options);
-    const path = this.font.getPath(text, metrics.x, metrics.baseline, fontSize, { kerning, letterSpacing, tracking });
+    const path = this.font.getPath(text, metrics.x, metrics.baseline, fontSize, Object.assign({}, options, { kerning, letterSpacing, tracking }));
 
     return path.toPathData();
   }
