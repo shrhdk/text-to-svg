@@ -4,9 +4,13 @@
 
 import * as opentype from 'opentype.js';
 
-const DEFAULT_FONT = require('path').join(__dirname, '../fonts/ipag.ttf');
-
-// Private method
+// Browser bundlers might not have path or __dirname. Make DEFAULT_FONT optional
+let DEFAULT_FONT = '';
+try {
+  DEFAULT_FONT = require('path').join(__dirname, '../fonts/ipag.ttf'); // eslint-disable-line global-require
+} catch (e) {
+  DEFAULT_FONT = '';
+}
 
 function parseAnchorOption(anchor) {
   let horizontal = anchor.match(/left|center|right/gi) || [];
